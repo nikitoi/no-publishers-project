@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Book(props) {
+function PublishedBook(props) {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function Book(props) {
   );
 }
 
-export default Book;
+export default PublishedBook;

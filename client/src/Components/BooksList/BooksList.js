@@ -1,6 +1,6 @@
 import React from 'react';
 
-function BuyBook(props) {
+function BooksList(props) {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function BuyBook(props) {
   );
 }
 
-export default BuyBook;
+export default BooksList;

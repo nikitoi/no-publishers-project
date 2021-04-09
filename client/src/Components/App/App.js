@@ -1,8 +1,9 @@
 import React from 'react';
+import './App.scss'
 
 function App(props) {
   return (
-    <div>
+    <div className='background'>
       <h3>Hello</h3>
     </div>
   );

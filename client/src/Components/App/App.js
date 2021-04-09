@@ -26,7 +26,7 @@ function App(props) {
         <Route path="/user">
           <User />
         </Route>
-        <Route path="/addbook">
+        <Route path="/:id/addbook">
           <AddBook />
         </Route>
         <Route path="/projectTeam">

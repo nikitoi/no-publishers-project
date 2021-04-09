@@ -13,7 +13,7 @@ function SignUp(props) {
           <input className='auth' type='text' name='phone' placeholder='Phone number'/>
           <button className='button button-entrance'>Зарегистрироваться</button>
         </div>
-    </div>
+      </div>
     </div>
   );
 }

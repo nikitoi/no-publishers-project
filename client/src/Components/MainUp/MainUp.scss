@@ -4,6 +4,27 @@
   // #e4b7a8, #89647b
 }
 
+.mainup__title {
+  width: 40vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.mainup__title_header {
+  font-size: 4em;
+  border-bottom: 2px solid white;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.mainup__title_text {
+
+}
+
 .mainup__image {
   position: absolute;
   right: 0;
@@ -14,9 +35,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  // padding: 50px 0;
 }
 
 .mainup__image_img {
-  width: 30vw;
   height: 60vh;
+  // height: 60vh;
 }

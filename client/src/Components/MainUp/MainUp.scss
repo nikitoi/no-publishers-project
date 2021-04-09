@@ -1,0 +1,22 @@
+.mainup {
+  background-image: linear-gradient(180deg, #e4b7a8, rgb(165, 133, 141));
+  min-height: calc(100vh - 60px);
+  // #e4b7a8, #89647b
+}
+
+.mainup__image {
+  position: absolute;
+  right: 0;
+  top: 15vh;
+  min-width: 60vw;
+  min-height: 70vh;
+  background-color: #fddcd0d5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainup__image_img {
+  width: 30vw;
+  height: 60vh;
+}

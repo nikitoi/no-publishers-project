@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer';
 import ProjectTeam from '../ProjectTeam/ProjectTeam'
 import MainUp from '../MainUp/MainUp'
 import MainDown from '../MainDown/MainDown'
+import './App.scss'
 
 function App(props) {
   return (

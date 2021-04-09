@@ -1,0 +1,14 @@
+.logo {
+  font-size: 30px;
+  margin: 0 20px;
+  font-family: 'Monoton', cursive;
+}
+
+.logo {
+
+  transition: all .5s;
+  
+  &:hover {
+    color: rgb(165, 133, 141);
+  }
+}

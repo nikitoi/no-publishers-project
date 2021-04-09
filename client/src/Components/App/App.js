@@ -8,6 +8,7 @@ import ProjectTeam from '../ProjectTeam/ProjectTeam'
 import MainUp from '../MainUp/MainUp'
 import MainDown from '../MainDown/MainDown'
 import './App.scss'
+import AddBook from '../AddBook/AddBook'
 
 function App(props) {
   return (
@@ -24,6 +25,9 @@ function App(props) {
         </Route>
         <Route path="/user">
           <User />
+        </Route>
+        <Route path="/addbook">
+          <AddBook />
         </Route>
         <Route path="/projectTeam">
           <ProjectTeam />

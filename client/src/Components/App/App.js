@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from '../Header/Header'
 import Login from '../Login/Login'
+import SignUp from '../SignUp/SignUp'
 import User from '../User/User'
 import Footer from '../Footer/Footer';
 import ProjectTeam from '../ProjectTeam/ProjectTeam'
@@ -23,6 +24,9 @@ function App(props) {
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
         </Route>
         <Route path="/user">
           <User />

@@ -1,9 +1,9 @@
 import React from 'react';
+import './Logo.scss'
 
 function Logo(props) {
   return (
-    <div>Logo
-    </div>
+    <span className="logo">ÉDITEUR</span>
   );
 }
 

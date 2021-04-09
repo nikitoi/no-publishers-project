@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import './Footer.scss'
 
 
 function Footer(props) {
   return (
-    <nav style={{ backgroundColor : 'green'}}>
-    <ul>
-      <li>
-        <Link to="/projectTeam">Команда проекта</Link>
-      </li>
-     
-    </ul>
-  </nav>
+    <nav className="footer">
+      <ul className="footer__links">
+        <li className="footer__link">
+          <Link to="/projectTeam" className="footer__link link">Команда проекта</Link>
+        </li>
+      </ul>
+    </nav>
   );
 }
 

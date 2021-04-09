@@ -36,3 +36,24 @@
     }
   }
 }
+
+canvas{
+  border: 1px solid #000
+}
+
+.pdf-container{
+  width: 80%;
+  height: 800px;
+  background-color: #e4e4e4;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-msg{
+  width: 100%;
+  color: red;
+  font-size: 14px;
+  font-weight: 600;
+}

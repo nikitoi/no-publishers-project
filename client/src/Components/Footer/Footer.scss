@@ -1,0 +1,17 @@
+.footer {
+  height: 60px;
+  background-color: rgb(165, 133, 141);
+  display: flex;
+  justify-content: center;
+}
+
+.footer__links {
+  display: flex;
+  align-items: center;
+}
+
+.footer__link {
+  text-decoration: none;
+  margin: 0 20px;
+  color: white;
+}

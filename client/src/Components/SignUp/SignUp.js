@@ -2,19 +2,20 @@ import React from 'react';
 import { Link } from "react-router-dom"
 
 
-function Login(props) {
+function SignUp(props) {
   return (
-    <div className='background'>
+    <div>
+       <div className='background'>
       <div className='modal_form'>
       <button className='button button-icon'></button>
       <input className='auth' type='email' name='email' placeholder='Email'/>
       <input className='auth' type='password' name='password' placeholder='Password'/>
-      <button className='button button-entrance'>Войти</button>
-      <div>У вас ещё нет аккаунта? <Link className='link' to="/signUp">Зарегистрироваться</Link></div>
+      <input className='auth' type='text' name='phone' placeholder='Phone number'/>
+      <button className='button button-entrance'>Зарегистрироваться</button>
       </div>
     </div>
-    
+    </div>
   );
 }
 
-export default Login;
+export default SignUp;

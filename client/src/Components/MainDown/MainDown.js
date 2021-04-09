@@ -1,8 +1,9 @@
 import React from 'react';
+import './MainDown.scss'
 
 function MainDown(props) {
   return (
-    <div>
+    <div className="maindown">
       
     </div>
   );

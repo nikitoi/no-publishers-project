@@ -25,6 +25,12 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <script>
+    pdfjsLib.getDocument('./test.pdf').then(doc => {
+      console.log('this file has ' + doc.p_pdfInfo.numPages + ' pages');
+      
+    })
+  </script>
 </body>
 
 </html>

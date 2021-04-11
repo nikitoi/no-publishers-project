@@ -45,12 +45,13 @@ function SignUp() {
       <div className='background'>
         {error && <p>{error}</p>}
         <form onSubmit={handleSubmit} className='modal_form'>
-          <button className='button button-icon'></button>
-          <input required ref={emailRef} className='auth' type='email' name='email' placeholder='Email' />
-          <input required ref={passwordRef} className='auth' type='password' name='password' placeholder='Password' />
-          <input required ref={confirmPasswordRef} className='auth' type='password' name='phone' placeholder='Confirm password' />
-          <button disabled={loading} type='submit' className='button button-entrance'>Зарегистрироваться</button>
-          <div>Do you have an account ?<Link className='link' to="/login">Log in</Link></div>
+          {/* <button className='button button-icon'></button> */}
+          <div className="color_dark mb-1 font-12">Введите свои данные</div>
+          <input required ref={emailRef} className='auth input mb-1' type='email' name='email' placeholder='Email' />
+          <input required ref={passwordRef} className='auth input mb-1' type='password' name='password' placeholder='Password' />
+          <input required ref={confirmPasswordRef} className='auth input mb-1' type='password' name='phone' placeholder='Confirm password' />
+          <button disabled={loading} type='submit' className='button button-entrance mb-1'>Регистрация</button>
+          <div className="color_dark">Уже есть аккаунт? <Link className='link link_dark' to="/login">Войти</Link></div>
         </form>
       </div>
     </div>

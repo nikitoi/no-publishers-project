@@ -2,7 +2,7 @@ import React from 'react';
 
 function User(props) {
   return (
-    <div>
+    <div className="background">
       <div>
         <button>Опубликовать книгу</button>
       </div>

@@ -10,13 +10,14 @@ function SignUp(props) {
 
   return (
     <div>
-      <div className='background'>
+      <div className='background flex_center'>
         <form className='modal_form'>
-          <button className='button button-icon'></button>
-          <input required ref={emailRef} className='auth' type='email' name='email' placeholder='Email' />
-          <input required ref={passwordRef} className='auth' type='password' name='password' placeholder='Password' />
-          <input required ref={confirmPasswordRef} className='auth' type='text' name='phone' placeholder='Confirm password' />
-          <button className='button button-entrance'>Зарегистрироваться</button>
+          {/* <button className='button button-icon'></button> */}
+          <div className="color_dark mb-1 font-12">Введите свои данные</div>
+          <input required ref={emailRef} className='auth input mb-1' type='email' name='email' placeholder='Email' />
+          <input required ref={passwordRef} className='auth input mb-1' type='password' name='password' placeholder='Password' />
+          <input required ref={confirmPasswordRef} className='auth input mb-1' type='text' name='phone' placeholder='Confirm password' />
+          <button className='button button-entrance mb-1'>Регистрация</button>
         </form>
       </div>
     </div>

@@ -10,6 +10,7 @@ import MainUp from '../MainUp/MainUp'
 import MainDown from '../MainDown/MainDown'
 import './App.scss'
 import AddBook from '../AddBook/AddBook'
+import InfoBook from "../InfoBook/InfoBook"
 import Reader from '../Reader/Reader'
 import TestReader from '../TestReader/TestReader'
 
@@ -37,6 +38,9 @@ function App() {
         </Route>
         <Route path="/projectTeam">
           <ProjectTeam />
+        </Route>
+        <Route path="/books/:id">
+          <InfoBook />
         </Route>
         <Route path="/reader">
           <Reader />

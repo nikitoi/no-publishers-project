@@ -42,7 +42,7 @@ function SignUp() {
 
   return (
     <div>
-      <div className='background'>
+      <div className='background flex_center'>
         {error && <p>{error}</p>}
         <form onSubmit={handleSubmit} className='modal_form'>
           {/* <button className='button button-icon'></button> */}
@@ -51,7 +51,7 @@ function SignUp() {
           <input required ref={passwordRef} className='auth input mb-1' type='password' name='password' placeholder='Password' />
           <input required ref={confirmPasswordRef} className='auth input mb-1' type='password' name='phone' placeholder='Confirm password' />
           <button disabled={loading} type='submit' className='button button-entrance mb-1'>Регистрация</button>
-          <div className="color_dark">Уже есть аккаунт? <Link className='link link_dark' to="/login">Войти</Link></div>
+          <div className="color_dark">Уже есть аккаунт? <Link className='link link_dark link_dark_narrow' to="/login">Войти</Link></div>
         </form>
       </div>
     </div>

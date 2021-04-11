@@ -9,6 +9,8 @@ import MainUp from '../MainUp/MainUp'
 import MainDown from '../MainDown/MainDown'
 import './App.scss'
 import AddBook from '../AddBook/AddBook'
+import SignUp from '../SignUp/SignUp'
+import InfoBook from "../InfoBook/InfoBook"
 
 function App(props) {
   return (
@@ -26,11 +28,17 @@ function App(props) {
         <Route path="/user">
           <User />
         </Route>
-        <Route path="/addbook">
+        <Route path="/:id/addbook">
           <AddBook />
         </Route>
         <Route path="/projectTeam">
           <ProjectTeam />
+        </Route>
+        <Route path="/signUp">
+          <SignUp />
+        </Route>
+        <Route path="/books/:id">
+          <InfoBook />
         </Route>
       </Switch>
       <Footer />

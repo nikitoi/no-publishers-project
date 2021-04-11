@@ -11,6 +11,7 @@ import MainDown from '../MainDown/MainDown'
 import './App.scss'
 import AddBook from '../AddBook/AddBook'
 import Reader from '../Reader/Reader'
+import TestReader from '../TestReader/TestReader'
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
         </Route>
         <Route path="/reader">
           <Reader />
+        </Route>
+        <Route path="/test">
+          <TestReader />
         </Route>
       </Switch>
       <Footer />

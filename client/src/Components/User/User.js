@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function User(props) {
   return (
-    <div>
+    <div className="background">
       <div>
         <Link to ='/:id/addbook' className='button buttonBook'>Опубликовать книгу</Link>
       </div>

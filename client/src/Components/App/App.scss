@@ -9,7 +9,7 @@
   text-decoration: none;
   color: white;
   position: relative;
-  transition: all .3s cubic-bezier(.2, 0, 0, 1);
+  transition: all .5s cubic-bezier(.2, 0, 0, 1);
   z-index: 1;
   
   &:after {
@@ -21,13 +21,13 @@
     right: 1.25rem;
     left: 1.25rem;
     background-color: #ffffff;
-    transition: all .3s cubic-bezier(.2, 0, 0, 1);
+    transition: all .5s cubic-bezier(.2, 0, 0, 1);
     transform-origin: bottom center;
     z-index: -1;
   }
   
   &:hover {
-    color: #2D2D2D;
+    color: rgba(144, 98, 109, 1);
     
     &:after {
       right: 0;
@@ -35,4 +35,104 @@
       height: 100%;
     }
   }
+}
+
+.link_dark {
+  color: rgba(144, 98, 109, 1);
+
+  &:after {
+    background-color: rgba(144, 98, 109, 1);
+  }
+  
+  &:hover {
+    color: white;
+  }
+}
+
+canvas{
+  border: 1px solid #000
+}
+
+.pdf-container{
+  width: 80%;
+  height: 800px;
+  background-color: #e4e4e4;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-msg{
+  width: 100%;
+  color: red;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.background {
+  background-image: linear-gradient(180deg, #e4b7a8, rgb(165, 133, 141));
+  // box-shadow: 0 10px 10px 10px rgba(34, 60, 80, 0.6) inset;
+  min-height: calc(100vh - 120px);
+}
+
+.button {
+  border: none;
+  width: 20em;
+  height: 2em;
+  color: white;
+  background-color: rgba(144, 98, 109, 1);
+  transition: all .5s;
+  font-family: 'Montserrat', sans-serif;
+
+  &:hover {
+    background-color: rgb(116, 72, 82);
+    // color: #fddcd0d5;
+  }
+}
+
+.flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex_row {
+  display: flex;
+  align-items: center;
+}
+
+.flex_column {
+  flex-direction: column;
+}
+
+.input {
+  border: none;
+  background-color: #fddcd0d5;
+  color: rgba(144, 98, 109, 1);
+  width: 20em;
+  height: 2em;
+}
+
+.input::placeholder {
+  color: rgba(144, 98, 109, 1);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.color_dark {
+  color: rgba(144, 98, 109, 1);
+}
+
+.mb-1 {
+  margin-bottom: 10px;
+}
+
+.font-12 {
+  font-size: 1.2em;
+}
+
+.modal_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

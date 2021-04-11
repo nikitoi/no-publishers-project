@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from '../../context/AuthContext';
-import './Login.scss'
 
 
 function Login() {
@@ -41,7 +40,7 @@ function Login() {
         <input required ref={emailRef} className='auth input mb-1' type='email' name='email' placeholder='Email' />
         <input required ref={passwordRef} className='auth input mb-1' type='password' name='password' placeholder='Password' />
         <button disabled={loading} type='submit' className='button button-entrance mb-1'>Войти</button>
-        <div className="color_dark">У вас ещё нет аккаунта? <Link className='link link_dark' to="/signUp">Зарегистрироваться</Link></div>
+        <div className="color_dark">У вас ещё нет аккаунта? <Link className='link link_dark' to="/signup">Зарегистрироваться</Link></div>
       </form>
     </div>
 

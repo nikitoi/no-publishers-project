@@ -13,6 +13,7 @@ import AddBook from '../AddBook/AddBook'
 import InfoBook from "../InfoBook/InfoBook"
 import Reader from '../Reader/Reader'
 import TestReader from '../TestReader/TestReader'
+import BooksList from '../BooksList/BooksList'
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function App() {
         </Route>
         <Route path="/reader">
           <Reader />
+        </Route>
+        <Route path="/books">
+          <BooksList />
         </Route>
         <Route path="/test">
           <TestReader />

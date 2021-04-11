@@ -13,7 +13,7 @@ import AddBook from '../AddBook/AddBook'
 import Reader from '../Reader/Reader'
 import TestReader from '../TestReader/TestReader'
 
-function App(props) {
+function App() {
   return (
     <Router>
     <div>

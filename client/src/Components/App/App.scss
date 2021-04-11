@@ -73,7 +73,7 @@ canvas{
 .background {
   background-image: linear-gradient(180deg, #e4b7a8, rgb(165, 133, 141));
   // box-shadow: 0 10px 10px 10px rgba(34, 60, 80, 0.6) inset;
-  height: calc(100vh - 120px);
+  min-height: calc(100vh - 120px);
 }
 
 .button {
@@ -100,6 +100,10 @@ canvas{
 .flex_row {
   display: flex;
   align-items: center;
+}
+
+.flex_column {
+  flex-direction: column;
 }
 
 .input {

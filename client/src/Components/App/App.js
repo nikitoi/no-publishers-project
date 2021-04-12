@@ -10,9 +10,13 @@ import MainUp from '../MainUp/MainUp'
 import MainDown from '../MainDown/MainDown'
 import './App.scss'
 import AddBook from '../AddBook/AddBook'
+import InfoBook from "../InfoBook/InfoBook"
 import Reader from '../Reader/Reader'
+import TestReader from '../TestReader/TestReader'
+import TestUpload from '../TestUpload/TestUpload'
+import BooksList from '../BooksList/BooksList'
 
-function App(props) {
+function App() {
   return (
     <Router>
     <div>
@@ -37,8 +41,20 @@ function App(props) {
         <Route path="/projectTeam">
           <ProjectTeam />
         </Route>
+        <Route path="/books/:id">
+          <InfoBook />
+        </Route>
         <Route path="/reader">
           <Reader />
+        </Route>
+        <Route path="/books">
+          <BooksList />
+        </Route>
+        <Route path="/test">
+          <TestReader />
+        </Route>
+        <Route path="/testupl">
+          <TestUpload />
         </Route>
       </Switch>
       <Footer />

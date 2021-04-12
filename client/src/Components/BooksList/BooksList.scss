@@ -1,0 +1,27 @@
+.bookslist {
+  min-height: 100vh;
+}
+
+.slick-slider {
+  width: 80vw;
+  position: relative;
+  top: 10vh;
+  left: 10vw;
+  margin-bottom: 70px;
+}
+
+.slick-slide {
+  display: flex!important;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.slider-card_img {
+  max-height: 250px;
+  max-width: 200px;
+}
+
+.slider-text {
+  color: rgb(110, 68, 78);
+}

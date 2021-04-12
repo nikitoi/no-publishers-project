@@ -21,11 +21,12 @@ function Login() {
       setError('')
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
+      console.log(error, emailRef.current.value, passwordRef.current.value)
       history.push('/')
 
     } catch (error) {
       setError(error.message)
-      console.log(error, emailRef, passwordRef)
+      console.log(error, emailRef.current.value, passwordRef.current.value)
       setLoading(false)
     }
   }

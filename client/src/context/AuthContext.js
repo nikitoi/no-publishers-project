@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { auth, app } from '../service/firebase'
+import { auth, firestore } from '../service/firebase'
+// import firebase from 'firebase'
 
 const AuthContext = React.createContext()
 
@@ -16,16 +17,16 @@ export function AuthProvider({ children }) {
     return auth.createUserWithEmailAndPassword(email, password)
   }
 
-  function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
-  }
+  // function login(email, password) {
+  //   return auth().signInWithEmailAndPassword(email, password)
+  // }
 
   function logout() {
     return auth.signOut()
   }
 
   function saveUserDB(userId, emailAddress, dateCreated, books = []) {
-    return app.firestore()
+    return firestore
       .collection('users')
       .add({
         userId, emailAddress, dateCreated, books
@@ -43,7 +44,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
-    login,
+    // login,
     signup,
     logout,
     saveUserDB

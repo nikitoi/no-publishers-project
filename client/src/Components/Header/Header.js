@@ -20,7 +20,7 @@ function Header() {
       setError("Failed to log out")
     }
   }
-  console.log(currentUser)
+
   return (
     <nav className="header">
       <Link to="/" className="header__link"><Logo /></Link>

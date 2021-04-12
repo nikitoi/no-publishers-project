@@ -15,6 +15,7 @@
   z-index: 1;
   min-width: 7em;
   text-align: center;
+  outline: none;
   
   &:after {
     content: '';
@@ -28,6 +29,10 @@
     transition: all .5s cubic-bezier(.2, 0, 0, 1);
     transform-origin: bottom center;
     z-index: -1;
+  }
+
+  &:focus {
+    outline: none;
   }
   
   &:hover {
@@ -59,7 +64,7 @@ li {
 
 .link_dark_narrow {
   min-width: 60px;
-  width: 60px;
+  width: 100px;
 }
 
 canvas{
@@ -126,6 +131,10 @@ canvas{
   color: rgba(144, 98, 109, 1);
   width: 20em;
   height: 2em;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .input::placeholder {
@@ -135,6 +144,7 @@ canvas{
 
 .color_dark {
   color: rgba(144, 98, 109, 1);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .mb-1 {
@@ -143,10 +153,73 @@ canvas{
 
 .font-12 {
   font-size: 1.2em;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .modal_form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.checkbox {
+  border: none;
+  background-color: #fddcd0d5;
+  color: rgba(144, 98, 109, 1);
+  width: 1.4em;
+  height: 1.4em;
+}
+
+.checkbox-title {
+  margin: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.checkbox-box {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.checkbox-title:after {
+  content: " ";
+  color: rgba(144, 98, 109, 1);
+  display: inline-block;
+  font: 20px/30px Arial;
+  position: relative;
+  text-align: center;
+  text-indent: 0px;
+  width: 1em;
+  height: 1em;
+  background: #f6d2c6;
+  border: none;
+  vertical-align: middle;
+  line-height: 1em;
+}
+
+.color-light {
+  background-color: #f6d2c6;
+}
+
+input:checked + .checkbox-title:after {
+   content: "х";
+  }
+   
+  input:disabled + .checkbox-title:after {
+   background: #eee;
+   color: #aaa;
+  }
+
+.text-center {
+  text-align: center;
+  line-height: 2em;
+}
+
+.wrapper-white {
+  background-color: #fdfcfbd5;
+  padding: 30px;
 }

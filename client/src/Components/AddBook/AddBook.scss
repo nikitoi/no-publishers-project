@@ -50,3 +50,43 @@
 	background-color: #fafafa;
 	outline-offset: -17px;
 }
+
+.file_input {
+  border: none;
+  width: 80px;
+}
+
+.add-book_label {
+  width: 200px;
+}
+
+.add-book_add-file {
+  width: 20em;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.input-textarea {
+  min-height: 160px;
+}
+
+.wide-input {
+  width: 30em;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.popup {
+  display: none;
+}
+
+.popup_opened {
+  display: flex;
+  position: absolute;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+}

@@ -48,10 +48,10 @@ function SignUp() {
         {error && <p>{error}</p>}
         <form onSubmit={handleSubmit} className='modal_form'>
           <div className="color_dark mb-1 font-12">Введите свои данные</div>
-          <input required ref={emailRef} className='auth input mb-2 color-light' type='email' name='email' placeholder='Email' />
-          <input required ref={passwordRef} className='auth input mb-2 color-light' type='password' name='password' placeholder='Password' />
-          <input required ref={confirmPasswordRef} className='auth input mb-2 color-light' type='password' name='phone' placeholder='Confirm password' />
-          <button disabled={loading} type='submit' className='button button-entrance mb-2'>Регистрация</button>
+          <input required ref={emailRef} className='auth input mb-1 color-light' type='email' name='email' placeholder='Email' />
+          <input required ref={passwordRef} className='auth input mb-1 color-light' type='password' name='password' placeholder='Password' />
+          <input required ref={confirmPasswordRef} className='auth input mb-1 color-light' type='password' name='phone' placeholder='Confirm password' />
+          <button disabled={loading} type='submit' className='button button-entrance mb-1'>Регистрация</button>
           <div className="color_dark">Уже есть аккаунт? <Link className='link link_dark link_dark_narrow' to="/login">Войти</Link></div>
         </form>
         </div>

@@ -58,9 +58,9 @@ function Login() {
       <button onClick={googleSignup} className='button button-icon'>Sign in via Google account</button>
       <form onSubmit={handleSubmit} className='modal_form'>
         <div className="color_dark mb-1 font-12">Введите логин и пароль</div>
-        <input required ref={emailRef} className='auth input mb-2 color-light' type='email' name='email' placeholder='Email' />
-        <input required ref={passwordRef} className='auth input mb-2 color-light' type='password' name='password' placeholder='Password' />
-        <button disabled={loading} type='submit' className='button button-entrance mb-2'>Войти</button>
+        <input required ref={emailRef} className='auth input mb-1 color-light' type='email' name='email' placeholder='Email' />
+        <input required ref={passwordRef} className='auth input mb-1 color-light' type='password' name='password' placeholder='Password' />
+        <button disabled={loading} type='submit' className='button button-entrance mb-1'>Войти</button>
         <div className="color_dark">У вас ещё нет аккаунта? <Link className='link link_dark' to="/signup">Зарегистрироваться</Link></div>
       </form>
       </div>

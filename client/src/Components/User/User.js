@@ -25,14 +25,15 @@ function User() {
         </div>
       <div>
         <div className="publishedBooks">
+      <h4 className='h4office'>Опубликованные</h4>
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
               {pubBook.map(el => {
                 return (
                   <div key={Math.random()} className='oneBook'>
                     <img className="slider-card_img" src={el.image} alt="book" />
-                    <h4 className="slider-card_title slider-text">{el.title}</h4>
-                    <h5 className="slider-card_author slider-text">{el.author}</h5>
+                    <h6 className="slider-card_title slider-text">{el.title}</h6>
+                    <h6 className="slider-card_author slider-text">{el.author}</h6>
                   </div>
                 )
               })}
@@ -41,7 +42,7 @@ function User() {
         </div>
 
         <div className="boughtBooks box-invisible">
-          {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
+        <h4 className='h4office'>Купленные</h4>
 
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
@@ -49,8 +50,8 @@ function User() {
                 return (
                   <div key={Math.random()} className='oneBook'>
                     <img className="slider-card_img" src={el.image} alt="book" />
-                    <h4 className="slider-card_title slider-text">{el.title}</h4>
-                    <h5 className="slider-card_author slider-text">{el.author}</h5>
+                    <h6 className="slider-card_title slider-text">{el.title}</h6>
+                    <h6 className="slider-card_author slider-text">{el.author}</h6>
                   </div>
                 )
               })}

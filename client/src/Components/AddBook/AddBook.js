@@ -66,51 +66,109 @@ console.log(url);
 
   }
 
-  function pickImg() {
+let [pdfName, setPdfName] = useState('')
+  let [imgName, setImgName] = useState('')
+
+  function pickImg(){
     document.querySelector('#img-input')?.click()
   }
 
-  function pickFile() {
+  function pickFile(){
     document.querySelector('#file')?.click()
   }
 
-  function showRules() {
+  function setFileName(e){
+    setPdfName(e.target.files[0].name)
+  }
 
+  function setImageName(e){
+    setImgName(e.target.files[0].name)
+  }
+
+  function showRules(){
+    const popup = document.querySelector('.popup')
+    popup.classList.toggle('popup_opened')
+  }
+
+  function showPageNums(){
+    const pages = document.querySelector('.pages-box')
+    pages.classList.toggle('hidden')
   }
 
 
   return (
     <div className='background  flex_center'>
+      <div className="wrapper-white">
+
       <form className='formAddBook modal_form' encType="multipart/form-data" method="post" action="/testupl" onSubmit={(e) => saveFile(e)}>
-        <input className='auth input mb-1 wide-input' name='title' type='text' required placeholder='Название книги' />
-        <textarea className='auth input mb-1 input-textarea wide-input' name='description' required type='text' placeholder='Описание' ></textarea>
+
+        <input className='auth input mb-1 wide-input color-light' name='title' type='text' required placeholder='Название книги' />
+        <textarea className='auth input mb-1 input-textarea wide-input color-light' name='description' required type='text' placeholder='Описание' ></textarea>
 
         <div className="flex_center add-book_add-file wide-input">
           <label htmlFor="file-input" className="color_dark mb-1 add-book_label">Выберите фото</label>
-          <input id="img-input" className="file_input" style={{ display: "none" }} type="file" required name="image" />
-          <input type="button" className="file_input input mb-1" id="loadFileXml" value="img" onClick={pickImg} />
+          <input id="img-input" onChange={(e) => setImageName(e)} className="file_input" style={{display: "none"}} type="file" required name="image" accept="image/*,image/jpeg" />
+          <div className="color_dark mb-1 add-book_label">{imgName}</div>
+          <input type="button" className="file_input input mb-1 color-light" id="loadFileXml" value="img" onClick={pickImg} />
         </div>
 
-        {/* <div className="flex_center add-book_add-file wide-input">
+        <div className="flex_center add-book_add-file wide-input">
           <label htmlFor="file-input" className="color_dark mb-1 add-book_label">Выберите файл</label>
-          <input id="file" className="file_input" style={{display: "none"}} type="file" name="upload" accept="application/pdf" />
-          <input type="button" className="file_input input mb-1" id="loadFileXml" value=".pdf" onClick={pickFile} />
-        </div> */}
+          <input id="file" onChange={(e) => setFileName(e)} className="file_input" style={{display: "none"}} type="file" required name="upload" accept="application/pdf" />
+          <div className="color_dark mb-1 add-book_label">{pdfName}</div>
+          <input type="button" className="file_input input mb-1 color-light" id="loadFileXml" value=".pdf" onClick={pickFile} />
+        </div>
 
-        <input className='auth input mb-1 wide-input' name='price' type='number' required placeholder='Укажите ценник' />
-        <div className="flex_column add-book_add-file wide-input">
-          <button className="button wide-input text-center" onClick={showRules}>Ознакомьтесь с правилами нашей площадки</button>
+        <input className='auth input mb-1 wide-input color-light' name='price' type='number' required placeholder='Укажите ценник в рублях' />
+
+        <div className="flex_center checkbox-pages flex_column">
+          <div className="">
+            <input id="checkbox-pages-id color-light" onChange={showPageNums} type="checkbox" className="checkbox" />
+            <label htmlFor="checkbox-pages-id" className="color_dark checkbox-title">Добавить ознакомительную версию </label>
+          </div>
+          <div className="flex_center pages-box hidden">
+            <label className="color_dark pages_label">Показывать страницы </label>
+            <input className='auth input num-input' name='price' type='number' required placeholder='с' />
+            <div className="color_dark"> - </div>
+            <input className='auth input num-input' name='price' type='number' required placeholder='по' />
+          </div>
+        </div>
+
+        <div className="flex_column add-book_add-file wide-input rules">
+          <button type="button" className="button wide-input text-center" onClick={showRules}>Прочитайте правила нашей площадки</button>
           <div className="flex_center checkbox-box">
-            <input id="checkbox-id" type="checkbox" className="checkbox" required />
+            <input id="checkbox-id" type="checkbox" className="checkbox color-light" required />
             <label htmlFor="checkbox-id" className="color_dark checkbox-title">Ознакомлен/а </label>
           </div>
         </div>
+
         <input className="button wide-input" type="submit" value="Опубликовать" />
+
       </form>
-      <div className="popup">
-        <h4>Правила публикации</h4>
-        <p>Мы не несем ответственности ни за что</p>
-        <img src={url} alt='img'/>
+
+      </div>
+
+      <div className="popup flex_center flex_column">
+        <div className="popup-background"></div>
+        <textarea readOnly className="textarea">
+            {`    Правила публикации
+    Основные положения
+    1. Исполнитель обязуется оказать Заказчику услуги, указанные в соответствующих Приложениях к Договору (далее — «Услуги»), в отношении Произведений Заказчика, а Заказчик обязуется принять и оплатить оказанные Услуги в соответствии с условиями настоящего Договора.
+    2. Исполнитель при оказании Услуг вправе привлекать третьих лиц по своему усмотрению. При этом Исполнитель несет перед Заказчиком ответственность за действия таких привлеченных третьих лиц в рамках оказания Услуг, как за свои собственные действия.
+    3. Заказчик обязуется, заверяет и гарантирует, что:
+    • имеет соответствующие права в полном объеме, в том числе право использования, на все результаты интеллектуальной деятельности, изготавливаемые в рамках настоящего Договора согласно применимому законодательству.
+    • Произведение, а также иллюстративный материал (в том числе иллюстрации, используемые в оформлении обложки Произведения, либо готовая обложка, предоставленная Заказчиком) не содержит в себе авторского материала, права на который не принадлежат Заказчику.
+    • использование Произведения и/или иллюстративного материала в соответствии с положениями Договора не влечет за собой нарушения каких-либо прав и законных интересов третьих лиц.
+    4. В случае получения Исполнителем каких-либо требований, претензий и/или исков в отношении Произведения и/или иллюстративного материала, используемого в рамках настоящего Договора, Заказчик обязан предоставлять Исполнителю все имеющиеся у него документы, подтверждающие права Заказчика на такое Произведение и/или иллюстративный материал, в течение 3 (трех) рабочих дней с момента получения требования Исполнителя, а также гарантирует, что любые подобные требования, претензии и/или иски со стороны третьих лиц будут разрешены Заказчиком самостоятельно (без привлечения Исполнителя), от своего имени и за свой счет, а также возместить Исполнителю все понесенные им убытки вследствие вышеуказанного.
+
+    Ответственность Сторон. Прочие условия
+    11. Исполнитель, оказывая Услуги, не несет никакой ответственности за содержание и/или оформление Произведения, включая его текст, иллюстрации и/или обложку.
+    12. Не предусмотренная настоящим Договором ответственность применяется Сторонами в соответствии с действующим законодательством Российской Федерации.
+    13. Стороны несут ответственность за невыполнение или ненадлежащее выполнение своих обязанностей в порядке и пределах, предусмотренных действующим законодательством Российской Федерации.
+    14. Споры и разногласия между сторонами в процессе реализации Договора будут разрешаться путем переговоров.
+    15. При невозможности урегулирования споров и разногласий путем переговоров, такие споры и разногласия подлежат разрешению в судебном порядке в соответствии с действующим законодательством Российской Федерации.`}
+        </textarea>
+        <button type="button" className="button wide-input text-center popup-close-btn" onClick={showRules}>Закрыть</button>
       </div>
     </div>
   );

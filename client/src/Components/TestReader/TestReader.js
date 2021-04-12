@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import './TestReader.scss'
 import { Document, Page, pdfjs } from 'react-pdf';
+import { fetchGetFile } from '../../redux/reduxThunk/asyncFunc'
+import { useDispatch, useSelector } from 'react-redux'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 
 // import pdfFile from './sample.pdf';
 
 export default function TestReader() {
 
+  const dispatch = useDispatch()
+  const { file } = useSelector(state => state)
+
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [file, setFile] = useState(null)
+  // const [file, setFile] = useState(null)
 
   useEffect(() => {
-    fetch('http://localhost:4000/test', {
-      method: 'POST',
-      responseType: 'blob'
-      // headers: { 'Content-Type' : 'multipart/form-data' },
-      // body: 1
-    })
-    .then(async res => res.blob([res.data], {type: 'application/pdf'}))
-    .then(data => setFile(data))
-
+    // fetch('http://localhost:4000/test', {
+    //   method: 'POST',
+    //   responseType: 'blob'
+    //   // headers: { 'Content-Type' : 'multipart/form-data' },
+    //   // body: 1
+    // })
+    // .then(async res => res.blob([res.data], {type: 'application/pdf'}))
+    // .then(data => setFile(data))
+    dispatch(fetchGetFile())
     // .then(async res => {
-      // const file = await res.blob([res.data], {type: 'application/pdf'})
-      // console.log(file);
-      // await setFile(file)
-      // return file
+    // const file = await res.blob([res.data], {type: 'application/pdf'})
+    // console.log(file);
+    // await setFile(file)
+    // return file
     // })
 
     // .then(res => {
@@ -36,10 +42,10 @@ export default function TestReader() {
     //     console.log(file);
     //     setFile(file)
     //   })
-      // .then(data => setFile(data))
-      // .catch(error => {
-      //     console.log(error);
-      // });
+    // .then(data => setFile(data))
+    // .catch(error => {
+    //     console.log(error);
+    // });
     // .then(res => res.blob())
     // .then(data => setFile(data))
 
@@ -58,7 +64,7 @@ export default function TestReader() {
       }
     })
   }
-  
+
   function next() {
     setPageNumber((prev) => {
       if (prev < numPages - 1) {

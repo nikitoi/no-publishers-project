@@ -1,0 +1,40 @@
+.blockBooks1{
+  width: 100vw;
+  margin-top: 4em;
+  // height: 400px;
+  display: flex;
+  // padding: 2em 2em;
+  // justify-content: flex-start;
+  // align-items: flex-start;
+  flex-wrap: wrap;
+  background-color: #fddcd0d5;
+  // justify-content: flex-start;
+  position: relative;
+}
+
+.oneBook{
+  padding: 1em;
+  // max-width: 10em;
+}
+
+.books-box {
+  margin: 0 auto;
+  // padding: 0 auto;
+  width: 80vw;
+  // max-width: calc(80vw / 2);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.margin2{
+  margin: 2em 0;
+}
+
+.disabled {
+  background-color: rgb(180, 139, 149)!important;
+}
+
+.box-invisible {
+  display: none!important;
+}

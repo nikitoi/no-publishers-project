@@ -9,7 +9,7 @@ function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const history = useHistory();
-  const { saveUserDB } = useAuth();
+  const { saveUserDB, login } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -19,12 +19,12 @@ function Login() {
     try {
       setError('')
       setLoading(true)
-      await firebase.auth().signInWithEmailAndPassword(emailRef.current.value, passwordRef.current.value)
+      await login(emailRef.current.value, passwordRef.current.value)
       history.push('/')
+      console.log(login);
 
     } catch (error) {
       setError(error.message)
-      console.log(error, emailRef.current.value, passwordRef.current.value)
       setLoading(false)
     }
   }

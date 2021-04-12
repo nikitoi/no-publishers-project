@@ -20,13 +20,23 @@ function Header() {
       setError("Failed to log out")
     }
   }
-  console.log(currentUser)
+
   return (
     <nav className="header">
       <Link to="/" className="header__link"><Logo /></Link>
       <ul className="header__links">
         <li className="header__link">
-          <Link to="/user" className="header__link link">Кабинет</Link>
+          <Link to="/" className="header__link link">Главная</Link>
+        </li>
+        <li className="header__link">
+          <Link to="/books" className="header__link link">Книги</Link>
+        </li>
+        <li className="header__link">
+          {currentUser ?
+            <Link to="/user" className="header__link link">Кабинет</Link> :
+            <Link to="/login" className="header__link link">Кабинет</Link>
+          }
+
         </li>
         {error && <p>{error}</p>}
         {currentUser === null ?
@@ -34,7 +44,7 @@ function Header() {
             <Link to="/login" className="header__link link">Войти</Link>
           </li> :
           <li className="header__link">
-            <button onClick={handleLogout} className="header__link link">Log Out</button>
+            <Link to="/" onClick={handleLogout} className="header__link link">Выйти</Link>
           </li>
         }
       </ul>

@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/bootstrap";
+
 .background{
   // background-color: black;
 }
@@ -11,6 +13,8 @@
   position: relative;
   transition: all .5s cubic-bezier(.2, 0, 0, 1);
   z-index: 1;
+  min-width: 80px;
+  text-align: center;
   
   &:after {
     content: '';
@@ -47,6 +51,11 @@
   &:hover {
     color: white;
   }
+}
+
+.link_dark_narrow {
+  min-width: 60px;
+  width: 60px;
 }
 
 canvas{
@@ -93,6 +102,7 @@ canvas{
 
 .flex_center {
   display: flex;
+  // flex-direction: column;
   justify-content: center;
   align-items: center;
 }

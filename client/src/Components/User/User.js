@@ -1,4 +1,5 @@
 import React from "react";
+import zaglushka from '../BooksList/zaglushka'
 import { Link } from 'react-router-dom'
 
 function User(props) {

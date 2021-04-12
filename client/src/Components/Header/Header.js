@@ -32,7 +32,11 @@ function Header() {
           <Link to="/books" className="header__link link">Книги</Link>
         </li>
         <li className="header__link">
-          <Link to="/user" className="header__link link">Кабинет</Link>
+          {currentUser ?
+            <Link to="/user" className="header__link link">Кабинет</Link> :
+            <Link to="/login" className="header__link link">Кабинет</Link>
+          }
+
         </li>
         {error && <p>{error}</p>}
         {currentUser === null ?
@@ -40,8 +44,7 @@ function Header() {
             <Link to="/login" className="header__link link">Войти</Link>
           </li> :
           <li className="header__link">
-            <Link to="/" onClick={handleLogout}  className="header__link link">Выйти</Link>
-            {/* <button onClick={handleLogout} className="header__link link">Log Out</button> */}
+            <Link to="/" onClick={handleLogout} className="header__link link">Выйти</Link>
           </li>
         }
       </ul>

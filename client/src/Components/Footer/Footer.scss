@@ -6,12 +6,42 @@
 }
 
 .footer__links {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
-.footer__link {
+.footer__box {
+  width: 33.33%;
   text-decoration: none;
   margin: 0 20px;
   color: white;
+}
+
+.footer__link {
+  color: white;
+  transition: all .5s;
+
+  &:hover {
+    opacity: .3;
+    color: white;
+  }
+}
+
+.text-center {
+  text-align: center;
+  margin: 0;
+  width: 5em;
+}
+
+.github {
+  height: 2em;
+  width: 2em;
+  margin: 0;
+}
+
+.footer__link_right {
+  display: flex;
+  justify-content: flex-end;
 }

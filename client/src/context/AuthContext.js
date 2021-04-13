@@ -25,11 +25,12 @@ export function AuthProvider({ children }) {
     return auth.signOut()
   }
 
-  function saveUserDB(userId, emailAddress, dateCreated, uplBooks = [], purBooks = []) {
+  function saveUserDB(user, emailAddress, dateCreated, uplBooks = [], purBooks = []) {
     return firestore
       .collection('users')
-      .add({
-        userId, emailAddress, dateCreated, uplBooks, purBooks
+      .doc(user)
+      .set({
+        emailAddress, dateCreated, uplBooks, purBooks
       });
   }
 

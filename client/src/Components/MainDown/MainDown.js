@@ -14,6 +14,7 @@ function MainDown(props) {
 
   return (
     <div className="maindown">
+      <a name="maindown">
       <Carousel >
         {carousels?.map(el => {
           return (
@@ -37,6 +38,7 @@ function MainDown(props) {
           )
         })}
       </Carousel>
+      </a>
     </div>
   );
 }

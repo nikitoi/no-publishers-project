@@ -42,3 +42,24 @@
   height: 60vh;
   // height: 60vh;
 }
+
+.mainup__arrow {
+  font-size: 10em;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  position: absolute;
+  bottom: 30px;
+  left: 48vw;
+  transition: all .5s;
+  cursor: pointer;
+  opacity: .8;
+
+  &:hover {
+    bottom: 20px;
+  }
+}
+
+.arrow-down {
+  width: 3vw;
+}

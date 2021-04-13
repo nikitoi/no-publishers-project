@@ -11,6 +11,9 @@ function MainUp(props) {
       <div className="mainup__image">
         <img className="mainup__image_img" src="./images/typewriter.png" alt="Печатная машинка" />
       </div>
+      <div className="mainup__arrow">
+        <a href="#maindown"><img src="./images/down-arrow.png" className="arrow-down" alt="arrow-down" /></a>
+      </div>
     </div>
   );
 }

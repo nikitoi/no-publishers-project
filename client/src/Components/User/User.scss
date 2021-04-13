@@ -14,7 +14,7 @@
 
 .oneBook{
   padding: 1em;
-  // max-width: 10em;
+  width: 14em;
 
 }
 
@@ -28,10 +28,6 @@
   justify-content: center;
 }
 
-.margin2{
-  margin: 2em 0;
-}
-
 .disabled {
   background-color: rgb(180, 139, 149)!important;
 }
@@ -42,8 +38,43 @@
 
 .h4office{
   color: white;
-position: relative;
-left: 1em;
-top: 5em;
-z-index: 100;
+  position: relative;
+  left: 0;
+  top: 2.4em;
+  z-index: 100;
+
+}
+
+.bookslist {
+  min-height: 120vh;
+}
+
+.slick-slider {
+  width: 80vw;
+  position: relative;
+  top: 10vh;
+  left: 10vw;
+  margin-bottom: 70px;
+}
+
+.slick-slide {
+  display: flex!important;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.slider-card_img {
+  max-height: 250px;
+  max-width: 200px;
+  margin: 0 auto 10px;
+}
+
+.slider-text {
+  color: rgb(110, 68, 78);
+  max-width: 200px;
+  max-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
 import Header from '../Header/Header'
 import Login from '../Login/Login'
 import SignUp from '../SignUp/SignUp'
@@ -17,10 +17,11 @@ import TestUpload from '../TestUpload/TestUpload'
 import BooksList from '../BooksList/BooksList'
 import { Provider } from 'react-redux'
 import store from '../../redux/store'
-import PublishedBook from '../PublishedBook/PublishedBook';
-import BoughtBook from '../BoughtBook/BoughtBook';
 
 function App() {
+
+  const history = useHistory()
+  console.log(history?.location, 'hiiiiisssss')
   return (
     <Provider store={store}>
       <Router>
@@ -48,12 +49,6 @@ function App() {
             </Route>
             <Route path="/books/:id">
               <InfoBook />
-            </Route>
-            <Route path="/:userId/pub/:bookId">
-              <PublishedBook />
-            </Route>
-            <Route path="/:userId/bought/:bookId">
-              <BoughtBook />
             </Route>
             <Route path="/reader">
               <Reader />

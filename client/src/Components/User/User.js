@@ -7,15 +7,39 @@ import { useAuth } from "../../context/AuthContext";
 
 function User() {
   // const pubBook = ''
-  const [userid, setUserId] = useState('')
+  const [books, setBooks] = useState([])
+  const [booksNum, setBooksNum] = useState(null)
 
   const pubBook = [...zaglushka].splice(0, 5)
   const { currentUser } = useAuth()
-  console.log(currentUser);
 
+  function loadBooks(){
+    if(currentUser){
+         firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
+      setBooksNum(req.data()?.uplBooks?.length);
+      console.log(req.data(), currentUser.uid);
+      return (
+        req.data()?.uplBooks.map(el => {
+          return (
+           firebase.firestore().collection('books').doc(el).get().then(req => setBooks((prev) => [...prev, req.data()]))
+          )
+        })
+      )
+    })
+    }
+  }
+
+  // loadBooks()
   useEffect(() => {
-    firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => console.log(req.data()))
+
+      loadBooks()
+      console.log('ddddddd', books);
+
   }, [])
+
+  
+
+  // console.log(books);
 
   function disabledChange() {
     document.querySelector('.btn-published').classList.toggle('disabled')
@@ -38,10 +62,11 @@ function User() {
       <h4 className='h4office ml-5'>Опубликованные</h4>
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
-              {pubBook.map(el => {
+              {books.length === booksNum && books.map(el => {
+                console.log(el);
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
-                    <img className="slider-card_img" src={el.image} alt="book" />
+                    <img className="slider-card_img" src={el.cover} alt="book" />
                     <h6 className="slider-card_title slider-text">{el.title}</h6>
                     <h6 className="slider-card_author slider-text">{el.author}</h6>
                   </div>

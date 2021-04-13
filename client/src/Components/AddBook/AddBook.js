@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {fetchAddFile} from '../../redux/reduxThunk/asyncFunc'
-import { useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useAuth } from "../../context/AuthContext";
+import store from '../../redux/store'
 import firebase from 'firebase';
 import './AddBook.scss'
 
 function AddBook(props) {
 
   const dispatch = useDispatch()
-  const { backFileName } = useSelector(state => state)
+  let state = useSelector(state => state)
+  let backFileName = state.backFileName
 
   const { currentUser } = useAuth();
   const [url, setUrl] = useState('')
@@ -17,79 +19,85 @@ function AddBook(props) {
   const [progress, setProgress] = useState(0);
   const [caption, setCaption] = useState('');
 
-  async function saveFile(e) {
+  const titleInput = useRef()
+  const descrInput = useRef()
+  const pageFromInput = useRef()
+  const pageToInput = useRef()
+  const priceInput = useRef()
+
+  useEffect(()=>{
+
+  }, [state])
+
+  function saveFile(e) {
 
     let formData = new FormData()
     formData.append('file', e.target.file.files[0])
 
-    let pdfBack
-
-    fetch('http://localhost:4000/testupl', {
-      method: 'POST',
-      // headers: { 'Content-Type' : 'multipart/form-data' },
-      body: formData
-    })
-      .then(res => res.json())
-      .then(data => pdfBack = data)
-      .then(() => console.log('filleeeee', pdfBack))
-
-    // console.log('filleeeee', backFileName);
-
     e.preventDefault()
 
-    const title = e.target.title.value
-    const description = e.target.description.value
-    const pages = [e.target.from.value, e.target.to.value]
-    const price = e.target.price.value
+    dispatch(fetchAddFile(formData))
 
-    const uploadTask = firebase.storage().ref(`books/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        // progress function ...
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-      },
-      (error) => {
-        // Error function ...
-        console.log(error);
-      },
-      () => {
-        // complete function ...
-        firebase.storage()
-          .ref("books")
-          .child(image.name)
-          .getDownloadURL()
-          .then((url) => {
-            setUrl(url);
+    setTimeout(() => {
+      const currStore = store.getState()
+      const pdfName = currStore.backFileName
 
-            // post image inside db
-            firebase.firestore()
-              .collection("books").add({
-                title,
-                description,
-                cover: url,
-                price,
-                demo: pages,
-                backFileName: pdfBack,
-                caption: caption,
-                author: currentUser.displayName,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              })
-              .then(book => {
-                // push id to user
-                console.log(book.id);
-                console.log(book);
-              })
+      const title = titleInput
+      const description = descrInput
+      const pages = [pageFromInput, pageToInput]
+      const price = priceInput
+  
+      const uploadTask = firebase.storage().ref(`books/${image?.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // progress function ...
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          // Error function ...
+          console.log(error);
+        },
+        () => {
+          // complete function ...
+          firebase.storage()
+            .ref("books")
+            .child(image?.name)
+            .getDownloadURL()
+            .then((url) => {
+              setUrl(url);
+  
+              // post image inside db
+              firebase.firestore()
+                .collection("books").add({
+                  title,
+                  description,
+                  cover: url,
+                  price,
+                  demo: pages,
+                  backFileName: pdfName,
+                  caption: caption,
+                  author: currentUser.displayName,
+                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                })
+                .then(book => {
+                  // push id to user
+                  console.log(book.id);
+                  console.log(book);
+                })
+  
+              setProgress(0);
+              setCaption("");
+              setImage(null);
+            });
+        }
+      );
 
-            setProgress(0);
-            setCaption("");
-            setImage(null);
-          });
-      }
-    );
+
+    }, 100);
 
     // window.location = '/user'
 
@@ -141,8 +149,8 @@ function AddBook(props) {
         {/* <img src={url} alt='img' /> */}
         <form className='formAddBook modal_form' encType="multipart/form-data" method="post" action="/testupl" onSubmit={(e) => saveFile(e)}>
 
-          <input className='auth input mb-1 wide-input color-light' name='title' type='text' required placeholder='Название книги' />
-          <textarea className='auth input mb-1 input-textarea wide-input color-light' name='description' required type='text' placeholder='Описание' ></textarea>
+          <input ref={titleInput} className='auth input mb-1 wide-input color-light' name='title' type='text' required placeholder='Название книги' />
+          <textarea ref={descrInput} className='auth input mb-1 input-textarea wide-input color-light' name='description' required type='text' placeholder='Описание' ></textarea>
 
           <div className="flex_center add-book_add-file wide-input">
             <label htmlFor="file-input" className="color_dark mb-1 add-book_label">Выберите фото</label>
@@ -158,7 +166,7 @@ function AddBook(props) {
             <input type="button" className="file_input input mb-1 color-light" id="loadFileXml" value=".pdf" onClick={pickFile} />
           </div>
 
-          <input className='auth input mb-1 wide-input color-light' name='price' type='number' required placeholder='Укажите ценник в рублях' />
+          <input ref={priceInput} className='auth input mb-1 wide-input color-light' name='price' type='number' required placeholder='Укажите ценник в рублях' />
 
           <div className="flex_center checkbox-pages flex_column">
             <div className="checkbox-box">
@@ -168,9 +176,9 @@ function AddBook(props) {
 
             <div className="flex_center pages-box hidden">
               <label className="color_dark pages_label">Показывать страницы </label>
-              <input className='auth input num-input' min='0' name='from' type='number' required placeholder='с' />
+              <input ref={pageFromInput} className='auth input num-input' min='1' name='from' type='number' required placeholder='с' />
               <div className="color_dark"> - </div>
-              <input className='auth input num-input' name='to' type='number' required placeholder='по' />
+              <input ref={pageToInput} className='auth input num-input' name='to' type='number' required placeholder='по' />
             </div>
           </div>
 

@@ -1,6 +1,9 @@
 import React from 'react'
+import {fetchAddFile} from '../../redux/reduxThunk/asyncFunc'
+import { useDispatch} from 'react-redux'
 
 export default function TestUpload() {
+  const dispatch = useDispatch()
 
   function saveFile(e) {
     console.log(e.target.file.files[0]);
@@ -15,14 +18,17 @@ export default function TestUpload() {
     let formData = new FormData()
     formData.append('file', e.target.file.files[0])
     
-    fetch('http://localhost:4000/testupl', {
-      method: 'POST',
-      // headers: { 'Content-Type' : 'multipart/form-data' },
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
+    // fetch('http://localhost:4000/testupl', {
+    //   method: 'POST',
+    //   body: formData
+    // })
+    // .then(res => res.json())
+    // .then(data => console.log(data))
+    dispatch(fetchAddFile(formData))
     e.preventDefault()
+
+
+
   }
 
   return (

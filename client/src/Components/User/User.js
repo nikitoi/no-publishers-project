@@ -1,54 +1,68 @@
 import React from "react";
+import zaglushka from '../BooksList/zaglushka'
 import { Link } from 'react-router-dom'
+import './User.scss'
 
-function User(props) {
+function User() {
+  // const pubBook = ''
+  const pubBook = [...zaglushka].splice(0, 5)
+
+  function disabledChange() {
+    document.querySelector('.btn-published').classList.toggle('disabled')
+    document.querySelector('.btn-bought').classList.toggle('disabled')
+    document.querySelector('.publishedBooks').classList.toggle('box-invisible')
+    document.querySelector('.boughtBooks').classList.toggle('box-invisible')
+  }
+
   return (
     <div className="background">
       <div>
-        <Link to ='/:id/addbook' className='button buttonBook'>Опубликовать книгу</Link>
+        <button className='button buttonBook margin2'><Link to='/:id/addbook' className='button'>Опубликовать книгу</Link></button>
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div className="flex_row">
+          <button onClick={disabledChange} className="btn-published button mr-3 disabled">Опубликованные книги</button>
+          <button onClick={disabledChange} className="btn-bought button">Купленные книги</button>
+        </div>
+      <div>
         <div className="publishedBooks">
-        {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
-          <h1>Опубликованные книги</h1>
-          <div>
-            <ul>
-              <li>
-                <div className="bookWindow" style={{ display: "flex", flexDirection: "row" }}>
-                <img style={{maxHeight: '100px', maxWidth: '100px'}} src='https://srisovki.com/wp-content/uploads/2020/11/kisspng-bill-ci24.jpg' alt='book' />
-                  <div className="bookInfo">
-                    <h3 className="titleBook">Название</h3>
-                    <h5 className="authorBook">Автор</h5>
-                    <div className="summaryBook">Информация о книге</div>
+      <h4 className='h4office'>Опубликованные</h4>
+          <div className="bookWindow blockBooks1 flex_center" >
+            <div className="books-box">
+              {pubBook.map(el => {
+                return (
+                  <div key={Math.random()} className='oneBook'>
+                    <img className="slider-card_img" src={el.image} alt="book" />
+                    <h6 className="slider-card_title slider-text">{el.title}</h6>
+                    <h6 className="slider-card_author slider-text">{el.author}</h6>
                   </div>
-                </div>
-              </li>
-              <li></li>
-              <li></li>
-            </ul>
+                )
+              })}
+            </div>
           </div>
         </div>
-        <div className="boughtBooks">
-        {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
-          <h1>Купленные книги</h1>
-          <div>
-            <ul>
-              <li>
-                <div className="bookWindow" style={{ display: "flex", flexDirection: "row" }}>
-                <img style={{maxHeight: '100px', maxWidth: '100px'}} src='https://srisovki.com/wp-content/uploads/2020/11/kisspng-bill-ci24.jpg' alt='book' />
-                  <div className="bookInfo">
-                    <h3 className="titleBook">Название</h3>
-                    <h5 className="authorBook">Автор</h5>
-                    <div className="summaryBook">Информация о книге</div>
+
+        <div className="boughtBooks box-invisible">
+        <h4 className='h4office'>Купленные</h4>
+
+          <div className="bookWindow blockBooks1 flex_center" >
+            <div className="books-box">
+              {zaglushka.map(el => {
+                return (
+                  <div key={Math.random()} className='oneBook'>
+                    <img className="slider-card_img" src={el.image} alt="book" />
+                    <h6 className="slider-card_title slider-text">{el.title}</h6>
+                    <h6 className="slider-card_author slider-text">{el.author}</h6>
                   </div>
-                </div>
-              </li>
-              <li></li>
-              <li></li>
-            </ul>
+                )
+              })}
+            </div>
           </div>
         </div>
+
       </div>
+
+
+
     </div>
   );
 }

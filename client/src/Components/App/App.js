@@ -15,51 +15,63 @@ import Reader from '../Reader/Reader'
 import TestReader from '../TestReader/TestReader'
 import TestUpload from '../TestUpload/TestUpload'
 import BooksList from '../BooksList/BooksList'
+import { Provider } from 'react-redux'
+import store from '../../redux/store'
+import PublishedBook from '../PublishedBook/PublishedBook';
+import BoughtBook from '../BoughtBook/BoughtBook';
 
 function App() {
   return (
-    <Router>
-    <div>
-      <Header />
-      <Switch>
-        <Route exact path="/">
-          <MainUp />
-          <MainDown />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
-        <Route path="/user">
-          <User />
-        </Route>
-        <Route path="/:id/addbook">
-          <AddBook />
-        </Route>
-        <Route path="/projectTeam">
-          <ProjectTeam />
-        </Route>
-        <Route path="/books/:id">
-          <InfoBook />
-        </Route>
-        <Route path="/reader">
-          <Reader />
-        </Route>
-        <Route path="/books">
-          <BooksList />
-        </Route>
-        <Route path="/test">
-          <TestReader />
-        </Route>
-        <Route path="/testupl">
-          <TestUpload />
-        </Route>
-      </Switch>
-      <Footer />
-    </div>
-  </Router>
+    <Provider store={store}>
+      <Router>
+        <div>
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <MainUp />
+              <MainDown />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/user">
+              <User />
+            </Route>
+            <Route path="/:id/addbook">
+              <AddBook />
+            </Route>
+            <Route path="/projectTeam">
+              <ProjectTeam />
+            </Route>
+            <Route path="/books/:id">
+              <InfoBook />
+            </Route>
+            <Route path="/:userId/pub/:bookId">
+              <PublishedBook />
+            </Route>
+            <Route path="/:userId/bought/:bookId">
+              <BoughtBook />
+            </Route>
+            <Route path="/reader">
+              <Reader />
+            </Route>
+            <Route path="/books">
+              <BooksList />
+            </Route>
+            <Route path="/test">
+              <TestReader />
+            </Route>
+            <Route path="/testupl">
+              <TestUpload />
+            </Route>
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+    </Provider>
   );
 }
 

@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import zaglushka from '../BooksList/zaglushka'
 import { Link } from 'react-router-dom'
 import './User.scss'
+import firebase from 'firebase'
+import { useAuth } from "../../context/AuthContext";
 
 function User() {
   // const pubBook = ''
+  const [userid, setUserId] = useState('')
+
   const pubBook = [...zaglushka].splice(0, 5)
+  const { currentUser } = useAuth()
+  console.log(currentUser);
+
+  useEffect(() => {
+    firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => console.log(req.data()))
+  }, [])
 
   function disabledChange() {
     document.querySelector('.btn-published').classList.toggle('disabled')
@@ -17,7 +27,7 @@ function User() {
   return (
     <div className="background">
       <div>
-        <button className='button buttonBook margin2'><Link to='/:id/addbook' className='button'>Опубликовать книгу</Link></button>
+        <button className='button buttonBook margin2'><Link to={`/${currentUser?.uid}/addbook`} className='button'>Опубликовать книгу</Link></button>
       </div>
         <div className="flex_row">
           <button onClick={disabledChange} className="btn-published button mr-3 disabled">Опубликованные книги</button>

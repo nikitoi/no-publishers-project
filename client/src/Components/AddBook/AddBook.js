@@ -22,7 +22,18 @@ function AddBook(props) {
     let formData = new FormData()
     formData.append('file', e.target.file.files[0])
 
-    dispatch(fetchAddFile(formData))
+    let pdfBack
+
+    fetch('http://localhost:4000/testupl', {
+      method: 'POST',
+      // headers: { 'Content-Type' : 'multipart/form-data' },
+      body: formData
+    })
+      .then(res => res.json())
+      .then(data => pdfBack = data)
+      .then(() => console.log('filleeeee', pdfBack))
+
+    // console.log('filleeeee', backFileName);
 
     e.preventDefault()
 
@@ -62,7 +73,7 @@ function AddBook(props) {
                 cover: url,
                 price,
                 demo: pages,
-                backFileName: backFileName,
+                backFileName: pdfBack,
                 caption: caption,
                 author: currentUser.displayName,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -79,6 +90,8 @@ function AddBook(props) {
           });
       }
     );
+
+    // window.location = '/user'
 
     // let formData = new FormData()
     // formData.append('file', e.target.file.files[0])

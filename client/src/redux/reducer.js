@@ -6,7 +6,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
 
     case ADD_FILE:
-      console.log(action.payload);
       return { ...state, backFileName: action.payload }
 
     case GET_FILE:

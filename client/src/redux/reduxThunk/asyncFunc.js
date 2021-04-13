@@ -5,9 +5,9 @@ export const fetchAddFile = (file) => {
   return (dispatch) => {
     
     // fetch(process.env.REACT_APP_UPLOADFILE_URL,{
-      fetch('http://localhost:4000/testupl',{
-    method: 'POST',
-    body: file
+    fetch('http://localhost:4000/testupl',{
+      method: 'POST',
+      body: file
   })
   .then(res => res.json())
   // .then(data => console.log(data))

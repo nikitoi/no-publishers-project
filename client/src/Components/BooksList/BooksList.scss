@@ -1,5 +1,5 @@
 .bookslist {
-  min-height: 120vh;
+  min-height: 840px;
 }
 
 .slick-slider {
@@ -30,4 +30,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.slick-prev {
+  top: 40%;
+}
+
+.slick-next {
+  top: 40%;
 }

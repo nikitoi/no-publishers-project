@@ -17,6 +17,8 @@ import TestUpload from '../TestUpload/TestUpload'
 import BooksList from '../BooksList/BooksList'
 import { Provider } from 'react-redux'
 import store from '../../redux/store'
+import PublishedBook from '../PublishedBook/PublishedBook';
+import BoughtBook from '../BoughtBook/BoughtBook';
 
 function App() {
   return (
@@ -46,6 +48,12 @@ function App() {
             </Route>
             <Route path="/books/:id">
               <InfoBook />
+            </Route>
+            <Route path="/:userId/pub/:bookId">
+              <PublishedBook />
+            </Route>
+            <Route path="/:userId/bought/:bookId">
+              <BoughtBook />
             </Route>
             <Route path="/reader">
               <Reader />

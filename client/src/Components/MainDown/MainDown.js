@@ -14,7 +14,8 @@ function MainDown(props) {
 
   return (
     <div className="maindown">
-      <Carousel fade>
+      <a name="maindown">
+      <Carousel >
         {carousels?.map(el => {
           return (
             <Carousel.Item>
@@ -26,8 +27,8 @@ function MainDown(props) {
                     return (
                       <div>
                         <img className="slider-card_img" src={el.image} alt="book" />
-                        <h4 className="slider-card_title slider-text">{el.title}</h4>
-                        <h5 className="slider-card_author slider-text">{el.author}</h5>
+                        <h6 className="slider-card_title slider-text">{el.title}</h6>
+                        <h6 className="slider-card_author slider-text">{el.author}</h6>
                       </div>
                     )
                   })}
@@ -37,6 +38,7 @@ function MainDown(props) {
           )
         })}
       </Carousel>
+      </a>
     </div>
   );
 }

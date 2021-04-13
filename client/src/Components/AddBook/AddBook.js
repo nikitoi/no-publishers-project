@@ -82,7 +82,7 @@ function AddBook(props) {
           </div>
           <div className="flex_center pages-box hidden">
             <label className="color_dark pages_label">Показывать страницы </label>
-            <input className='auth input num-input' name='price' type='number' required placeholder='с' />
+            <input className='auth input num-input' min='0' name='price' type='number' required placeholder='с' />
             <div className="color_dark"> - </div>
             <input className='auth input num-input' name='price' type='number' required placeholder='по' />
           </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {fetchAddFile} from '../../redux/reduxThunk/asyncFunc'
-import { useDispatch, useSelector} from 'react-redux'
+import { fetchAddFile } from '../../redux/reduxThunk/asyncFunc'
+import { useDispatch, useSelector } from 'react-redux'
 import { useAuth } from "../../context/AuthContext";
 import firebase from 'firebase';
 import './AddBook.scss'
@@ -24,6 +24,8 @@ function AddBook(props) {
 
     let pdfBack
 
+    dispatch(fetchAddFile(formData))
+
     fetch('http://localhost:4000/testupl', {
       method: 'POST',
       // headers: { 'Content-Type' : 'multipart/form-data' },
@@ -32,8 +34,6 @@ function AddBook(props) {
       .then(res => res.json())
       .then(data => pdfBack = data)
       .then(() => console.log('filleeeee', pdfBack))
-
-    // console.log('filleeeee', backFileName);
 
     e.preventDefault()
 
@@ -80,9 +80,18 @@ function AddBook(props) {
               })
               .then(book => {
                 // push id to user
-                console.log(book.id);
-                console.log(book);
-              })
+                // console.log(book.id);
+                console.log(currentUser.uid);
+
+                return firebase.firestore()
+                  .collection('users')
+                  // .where('userId', '==', currentUser.uid)
+                  // .get()
+                  .doc(currentUser.uid)
+                  .update({ uplBooks: firebase.firestore.FieldValue.arrayUnion(book.id) })
+                  // .set({ uplBooks: firebase.firestore.FieldValue.arrayUnion(book.id) }, {merge: true})
+
+              }).then((res)=> console.log(res)).catch(err => console.log(err.message))
 
             setProgress(0);
             setCaption("");
@@ -153,7 +162,7 @@ function AddBook(props) {
 
           <div className="flex_center add-book_add-file wide-input">
             <label htmlFor="file-input" className="color_dark mb-1 add-book_label">Выберите файл</label>
-            <input id="file" onChange={(e) => setFileName(e)} className="file_input" style={{display: "none"}} type="file" required name="upload" accept="application/pdf" />
+            <input id="file" onChange={(e) => setFileName(e)} className="file_input" style={{ display: "none" }} type="file" required name="upload" accept="application/pdf" />
             <div className="color_dark mb-1 add-book_label">{pdfName}</div>
             <input type="button" className="file_input input mb-1 color-light" id="loadFileXml" value=".pdf" onClick={pickFile} />
           </div>

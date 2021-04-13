@@ -18,10 +18,16 @@ function User() {
   }, [])
 
   function disabledChange() {
-    document.querySelector('.btn-published').classList.toggle('disabled')
-    document.querySelector('.btn-bought').classList.toggle('disabled')
-    document.querySelector('.publishedBooks').classList.toggle('box-invisible')
-    document.querySelector('.boughtBooks').classList.toggle('box-invisible')
+    document.querySelector('.btn-published').classList.add('disabled')
+    document.querySelector('.btn-bought').classList.remove('disabled')
+    document.querySelector('.publishedBooks').classList.remove('box-invisible')
+    document.querySelector('.boughtBooks').classList.add('box-invisible')
+  }
+  function disabledChange1() {
+    document.querySelector('.btn-published').classList.remove('disabled')
+    document.querySelector('.btn-bought').classList.add('disabled')
+    document.querySelector('.publishedBooks').classList.add('box-invisible')
+    document.querySelector('.boughtBooks').classList.remove('box-invisible')
   }
 
   return (
@@ -31,7 +37,7 @@ function User() {
       </div>
         <div className="flex_row">
           <button onClick={disabledChange} className="btn-published button mr-3 ml-5 disabled">Опубликованные книги</button>
-          <button onClick={disabledChange} className="btn-bought button">Купленные книги</button>
+          <button onClick={disabledChange1} className="btn-bought button">Купленные книги</button>
         </div>
       <div>
         <div className="publishedBooks">

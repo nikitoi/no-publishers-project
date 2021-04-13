@@ -4,6 +4,7 @@ import './MainUp.scss';
 function MainUp(props) {
   return (
     <div className="mainup">
+      <a name="mainup">
       <div className="mainup__title">
         <h1 className="mainup__title_header">Main Header</h1>
         <p className="mainup__title_text">some text about us</p>
@@ -14,6 +15,7 @@ function MainUp(props) {
       <div className="mainup__arrow">
         <a href="#maindown"><img src="./images/down-arrow.png" className="arrow-down" alt="arrow-down" /></a>
       </div>
+      </a>
     </div>
   );
 }

@@ -33,6 +33,15 @@ export function AuthProvider({ children }) {
       });
   }
 
+
+  function saveBookDB(title, description, cover, file, price, demo = [], backFileName) {
+    return firestore
+      .collection('books')
+      .add({
+        title, description, cover, file, price, demo, backFileName
+      });
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setLoading(false)
@@ -47,7 +56,8 @@ export function AuthProvider({ children }) {
     login,
     signup,
     logout,
-    saveUserDB
+    saveUserDB,
+    saveBookDB
   }
 
   return (

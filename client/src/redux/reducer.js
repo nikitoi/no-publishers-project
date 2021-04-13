@@ -1,12 +1,11 @@
 import { ADD_FILE, GET_FILE} from './actionTypes/actionTypes'
 
-const initialState = { title: 'books',backFileName: '', file: [] }
+const initialState = { title: 'books', backFileName: '', file: [] }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
     case ADD_FILE:
-      console.log(action.payload);
       return { ...state, backFileName: action.payload }
 
     case GET_FILE:

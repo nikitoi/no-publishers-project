@@ -14,6 +14,7 @@ function User() {
   const { currentUser } = useAuth()
 
   function loadBooks(){
+    console.log('curr user',currentUser);
     if(currentUser){
          firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
       setBooksNum(req.data()?.uplBooks?.length);
@@ -35,7 +36,7 @@ function User() {
       loadBooks()
       console.log('ddddddd', books);
 
-  }, [])
+  }, [currentUser])
 
   
 

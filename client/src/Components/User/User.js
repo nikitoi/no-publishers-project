@@ -20,7 +20,6 @@ function User() {
     if(currentUser){
          firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
       setBooksNum(req.data()?.uplBooks?.length);
-      // console.log(req.data(), currentUser.uid);
       return (
         req.data()?.uplBooks.map(el => {
           return (
@@ -55,7 +54,7 @@ function User() {
 
   // loadBooks()
   useEffect(() => {
-
+                                                      
     uplBook()
     purBook()
       console.log('ddddddd', uplBooks, purBooks );

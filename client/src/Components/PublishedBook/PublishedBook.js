@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 // import { Document, Page, pdfjs } from 'react-pdf';
@@ -7,11 +8,34 @@ import download from 'downloadjs';
 import '../InfoBook/InfoBook'
 import './PublishedBook.scss'
 import firebase from 'firebase'
+import { useAuth } from '../../context/AuthContext';
 
 
 function PublishedBook(props) {
   const params = useParams()
+
+  const { currentUser } = useAuth()
+  // console.log(params);
+
   const [book, setBook] = useState(null)
+  const history = useHistory()
+
+  function deleteBook() {
+    firebase.firestore()
+      .collection('books')
+      .doc(params.id)
+      .delete()
+      .then(req => {
+        console.log(req)
+        history.push('/user')
+      })
+
+    if (currentUser) {
+      firebase.firestore().collection('users').doc(currentUser?.uid).update({
+        uplBooks: firebase.firestore.FieldValue.arrayRemove(params.id)
+      })
+    }
+  }
 
   useEffect(() => {
     firebase.firestore()
@@ -65,10 +89,12 @@ function PublishedBook(props) {
           <div className='summaryBook color_dark mt-5' >{book && book[0].description}</div>
         </div>
       </div>
-      <div className='buttonList pub_book_btn_box'>
-        <button className='button buttonBook butlist mr-3' >Изменить</button>
-        <button className='button buttonBook butlist' >Удалить</button>
+
+      <div className='buttonList'>
+        <Link to={`/user/edit/${params.id}`}><button className='button buttonBook butlist mr-3' >Изменить</button></Link>
+        <button onClick={deleteBook} className='button buttonBook butlist' >Удалить</button>
       </div>
+
       <div className='buttonList pub_book_btn_box'>
         <button onClick={downloadPdf} className='button buttonBook butlist mr-3' >Скачать</button>
         <Link to={`/user/pub/${book && book[1]}/read`}><button className='button buttonBook butlist' >Читать фрагмент</button></Link>

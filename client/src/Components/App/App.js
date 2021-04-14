@@ -16,6 +16,7 @@ import BoughtBook from "../BoughtBook/BoughtBook"
 import Reader from '../Reader/Reader'
 import TestUpload from '../TestUpload/TestUpload'
 import BooksList from '../BooksList/BooksList'
+import Edit from '../Edit/Edit'
 import { Provider } from 'react-redux'
 import store from '../../redux/store'
 
@@ -56,6 +57,9 @@ function App() {
             </Route>
             <Route path="/user/bought/:id">
               <BoughtBook />
+            </Route>
+            <Route path="/user/edit/:id">
+              <Edit />
             </Route>
             <Route path="/reader">
               <Reader />

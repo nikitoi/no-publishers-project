@@ -26,10 +26,12 @@ function InfoBook(props) {
         <div className="mr-3">
           <img className='imgCover' src={book?.cover} alt={book?.title} />
         </div>
-        <div className='bookInfo'>
-          <h3 className='color_dark titleBook' >{book?.title}</h3>
-          <h5 className='color_dark authorBook' >{book?.bookauthor}</h5>
-          <div className='summaryBook color_dark mt-5' >{book?.description}</div>
+        <div className="bookInfo-box">
+          <div className='bookInfo'>
+            <h3 className='color_dark titleBook' >{book?.title}</h3>
+            <h5 className='color_dark authorBook' >{book?.bookauthor}</h5>
+            <div className='summaryBook color_dark mt-5' >{book?.description}</div>
+          </div>
         </div>
       </div>
       <div className='buttonList'>

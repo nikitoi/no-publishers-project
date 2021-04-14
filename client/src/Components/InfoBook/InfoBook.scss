@@ -8,10 +8,18 @@
 }
 
 .bookInfo{
-  width: 25em;
+  // width: 25em;
+  height: 31em;
+  margin: 2em;
+  // background-color: #fddcd0;
+  overflow: scroll;
+}
+
+.bookInfo-box {
   height: 35em;
-  padding: 2em;
+  width: 25em;
   background-color: #fddcd0;
+  // overflow: hidden;
 }
 
 .imgCover{
@@ -27,7 +35,7 @@
 
 .summaryBook {
   hyphens: auto;
-  overflow: scroll;
+  // overflow: scroll;
   height: 23em;
 }
 

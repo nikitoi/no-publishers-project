@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 // import { Document, Page, pdfjs } from 'react-pdf';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import download from 'downloadjs';

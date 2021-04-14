@@ -15,55 +15,50 @@ function User() {
   // const pubBook = [...zaglushka].splice(0, 5)
   const { currentUser } = useAuth()
 
-  function uplBook(){
+  function uplBook() {
     // console.log('curr user',currentUser);
-    if(currentUser){
-         firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
-      setBooksNum(req.data()?.uplBooks?.length);
-      return (
-        req.data()?.uplBooks.map(el => {
-          return (
-           firebase.firestore().collection('books').doc(el).get().then(req => {
-            setuplBooks((prev) => [...prev, [req.data(), req.id]])
-            })
-          )
-        })
-      )
-    })
+    if (currentUser) {
+      firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
+        setBooksNum(req.data()?.uplBooks?.length);
+        return (
+          req.data()?.uplBooks.map(el => {
+            return (
+              firebase.firestore().collection('books').doc(el).get().then(req => {
+                setuplBooks((prev) => [...prev, [req.data(), req.id]])
+              })
+            )
+          })
+        )
+      })
     }
   }
 
-  function purBook(){
-    console.log('curr user',currentUser);
-    if(currentUser){
-         firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
-      setBooksNum1(req.data()?.purBooks?.length);
-      console.log(req.data(), currentUser.uid);
-      return (
-        req.data()?.purBooks.map(el => {
-          return (
-           firebase.firestore().collection('books').doc(el).get().then(req => {
-            setpurBooks((prev) => [...prev, [req.data(), req.id]])
-            })
-          )
-        })
-      )
-    })
+  function purBook() {
+    if (currentUser) {
+      firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
+        setBooksNum1(req.data()?.purBooks?.length);
+        return (
+          req.data()?.purBooks.map(el => {
+            return (
+              firebase.firestore().collection('books').doc(el).get().then(req => {
+                setpurBooks((prev) => [...prev, [req.data(), req.id]])
+              })
+            )
+          })
+        )
+      })
     }
   }
 
   // loadBooks()
   useEffect(() => {
-                                                      
+
     uplBook()
     purBook()
-      console.log('ddddddd', uplBooks, purBooks );
+    console.log('ddddddd', uplBooks, purBooks);
 
   }, [currentUser])
 
-  
-
-  // console.log(books);
 
   function disabledChange() {
     document.querySelector('.btn-published').classList.add('disabled')
@@ -81,19 +76,19 @@ function User() {
   return (
     <div className="background">
       <div className="pt-3">
-        <button className='button buttonBook margin2 ml-5 mb-4 mt-5'><Link to={`/${currentUser?.uid}/addbook`} className='button'>Опубликовать книгу</Link></button>
+        <Link to={`/${currentUser?.uid}/addbook`} className='button'><button className='button buttonBook margin2 mb-4 mt-5'>Опубликовать книгу</button></Link>
       </div>
-        <div className="flex_row">
-          <button onClick={disabledChange} className="btn-published button mr-3 ml-5 disabled">Опубликованные книги</button>
-          <button onClick={disabledChange1} className="btn-bought button">Купленные книги</button>
-        </div>
+      <div className="flex_row">
+        <button onClick={disabledChange} className="btn-published button ml-5 mr-3 disabled">Опубликованные книги</button>
+        <button onClick={disabledChange1} className="btn-bought button">Купленные книги</button>
+      </div>
       <div>
         <div className="publishedBooks">
-      <h4 className='h4office ml-5'>Опубликованные</h4>
+          <h4 className='h4office ml-5'>Опубликованные</h4>
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
               {uplBooks.length === booksNum && uplBooks.map(el => {
-                // console.log(books);
+                console.log(uplBooks);
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
                     <Link to={`/user/pub/${el[1]}`}><img className="slider-card_img" src={el[0].cover} alt="book" /></Link>
@@ -107,7 +102,7 @@ function User() {
         </div>
 
         <div className="boughtBooks box-invisible">
-        <h4 className='h4office ml-5'>Купленные</h4>
+          <h4 className='h4office ml-5'>Купленные</h4>
 
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">

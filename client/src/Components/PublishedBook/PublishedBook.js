@@ -82,10 +82,12 @@ function PublishedBook(props) {
         <div className="mr-3">
           <img className='imgCover' src={book && book[0].cover} alt={book && book[0].title} />
         </div>
-        <div className='bookInfo'>
-          <h3 className='color_dark titleBook' >{book && book[0].title}</h3>
-          <h5 className='color_dark authorBook' >{book && book[0].bookauthor}</h5>
-          <div className='summaryBook color_dark mt-5' >{book && book[0].description}</div>
+        <div className="bookInfo-box">
+          <div className='bookInfo'>
+            <h3 className='color_dark titleBook' >{book && book[0].title}</h3>
+            <h5 className='color_dark authorBook' >{book && book[0].bookauthor}</h5>
+            <div className='summaryBook color_dark mt-5' >{book && book[0].description}</div>
+          </div>
         </div>
       </div>
 

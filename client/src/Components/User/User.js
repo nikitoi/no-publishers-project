@@ -99,12 +99,12 @@ function User() {
 
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
-              {purBooks.map(el => {
+              {purBooks?.map(el => {
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
-                    <Link to={`/user/bought/${el[1]}`}><img className="slider-card_img" src={el.image} alt="book" /></Link>
-                    <h6 className="slider-card_title slider-text">{el.title}</h6>
-                    <h6 className="slider-card_author slider-text">{el.author}</h6>
+                    <Link to={`/user/bought/${el[1]}`}><img className="slider-card_img" src={el[0]?.cover} alt="book" /></Link>
+                    <h6 className="slider-card_title slider-text">{el[0]?.title}</h6>
+                    <h6 className="slider-card_author slider-text">{el[0]?.author}</h6>
                   </div>
                 )
               })}

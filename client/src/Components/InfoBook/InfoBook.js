@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import firebase from 'firebase'
 import './InfoBook.scss'
+import { useAuth } from '../../context/AuthContext';
 
 function InfoBook(props) {
   const params = useParams()
+  const {currentUser} = useAuth()
   const [book, setBook] = useState(null)
+  const history = useHistory()
+
+  function buyBook() {
+    firebase.firestore()
+      .collection('users')
+      .doc(currentUser.uid)
+      .update({ purBooks: firebase.firestore.FieldValue.arrayUnion(params.id) })
+      
+      history.push('/user')
+  }
 
   useEffect(() => {
     firebase.firestore()
@@ -35,7 +47,7 @@ function InfoBook(props) {
         </div>
       </div>
       <div className='buttonList'>
-        <button className='button buttonBook butlist mr-3' >Купить за {book && book[0].price} &#8381;</button>
+        <button onClick={buyBook} className='button buttonBook butlist mr-3' >Купить за {book && book[0].price} &#8381;</button>
         <Link to={`/user/pub/${book && book[1]}/read`}><button className='button buttonBook butlist' >Ознакомительная версия</button></Link>
       </div>
     </div>

@@ -121,7 +121,7 @@ export default function Reader() {
 
   return (
     <div className='background flex_center flex_column'>
-      <Link to={`/user/pub/${book && book[1]}`} className="reader_button"><button className='button' >Назад</button></Link>
+      {/* <Link to={`/user/pub/${book && book[1]}`} className="reader_button"><button className='button' >Назад</button></Link> */}
       <div className="reader_button_box">
         <button onClick={disabledChange} className='button btn-one-page mr-4' >Показывать одну страницу</button>
         <button onClick={disabledChange} className='button btn-two-pages mr-4 disabled' >Показывать две страницы</button>

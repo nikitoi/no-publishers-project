@@ -179,7 +179,7 @@ function AddBook(props) {
               <label className="color_dark pages_label">Показывать страницы </label>
               <input ref={pageFromInput} className='auth input num-input' min='1' name='from' type='number' required placeholder='с' />
               <div className="color_dark"> - </div>
-              <input ref={pageToInput} className='auth input num-input' name='to' type='number' required placeholder='по' />
+              <input ref={pageToInput} className='auth input num-input' min='1' name='to' type='number' required placeholder='по' />
             </div>
           </div>
 

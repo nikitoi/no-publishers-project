@@ -14,6 +14,9 @@ function MainDown(props) {
 
   return (
     <div className="maindown">
+      <div className="maindown__arrow">
+        <a href="#mainup"><img src="../images/down-arrow.png" className="arrow-up" alt="arrow-up" /></a>
+      </div>
       <a name="maindown">
       <Carousel >
         {carousels?.map(el => {

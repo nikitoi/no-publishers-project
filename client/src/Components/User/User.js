@@ -11,15 +11,14 @@ function User() {
   const [purBooks, setpurBooks] = useState([])
 
   const [booksNum, setBooksNum] = useState(null)
-  const [booksNum1, setBooksNum1] = useState(null)
-  // const pubBook = [...zaglushka].splice(0, 5)
+  const [bgtBooksNum, setBgtBooksNum] = useState(null)
   const { currentUser } = useAuth()
 
   function uplBook() {
-    // console.log('curr user',currentUser);
     if (currentUser) {
       firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
         setBooksNum(req.data()?.uplBooks?.length);
+        setBgtBooksNum(req.data()?.purBooks?.length);   
         return (
           req.data()?.uplBooks.map(el => {
             return (
@@ -36,11 +35,14 @@ function User() {
   function purBook() {
     if (currentUser) {
       firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
-        setBooksNum1(req.data()?.purBooks?.length);
+        
         return (
           req.data()?.purBooks.map(el => {
+            
             return (
               firebase.firestore().collection('books').doc(el).get().then(req => {
+                console.log('qqqqq',req.data());
+                
                 setpurBooks((prev) => [...prev, [req.data(), req.id]])
               })
             )
@@ -50,7 +52,6 @@ function User() {
     }
   }
 
-  // loadBooks()
   useEffect(() => {
     uplBook()
     purBook()
@@ -96,18 +97,20 @@ function User() {
             </div>
           </div>
         </div>
-
+        
         <div className="boughtBooks box-invisible">
           <h4 className='h4office ml-5'>Купленные</h4>
 
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
               {purBooks.map(el => {
+                console.log('3333', purBooks);
+                
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
-                    <Link to={`/user/bought/${el[1]}`}><img className="slider-card_img" src={el.image} alt="book" /></Link>
-                    <h6 className="slider-card_title slider-text">{el.title}</h6>
-                    <h6 className="slider-card_author slider-text">{el.author}</h6>
+                    <Link to={`/user/bought/${el[1]}`}><img className="slider-card_img" src={el[0]?.cover} alt="book" /></Link>
+                    <h6 className="slider-card_title slider-text">{el[0]?.title}</h6>
+                    <h6 className="slider-card_author slider-text">{el[0]?.bookauthor}</h6>
                   </div>
                 )
               })}

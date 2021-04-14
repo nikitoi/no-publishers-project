@@ -10,12 +10,10 @@ import firebase from 'firebase'
 import { useAuth } from '../../context/AuthContext';
 
 
-function PublishedBook(props) {
+function PublishedBook() {
+
   const params = useParams()
-
   const { currentUser } = useAuth()
-  // console.log(params);
-
   const [book, setBook] = useState(null)
   const history = useHistory()
 
@@ -25,7 +23,6 @@ function PublishedBook(props) {
       .doc(params.id)
       .delete()
       .then(req => {
-        console.log(req)
         history.push('/user')
       })
 
@@ -82,10 +79,12 @@ function PublishedBook(props) {
         <div className="mr-3">
           <img className='imgCover' src={book && book[0].cover} alt={book && book[0].title} />
         </div>
-        <div className='bookInfo'>
-          <h3 className='color_dark titleBook' >{book && book[0].title}</h3>
-          <h5 className='color_dark authorBook' >{book && book[0].bookauthor}</h5>
-          <div className='summaryBook color_dark mt-5' >{book && book[0].description}</div>
+        <div className="bookInfo-box">
+          <div className='bookInfo'>
+            <h3 className='color_dark titleBook' >{book && book[0].title}</h3>
+            <h5 className='color_dark authorBook' >{book && book[0].bookauthor}</h5>
+            <div className='summaryBook color_dark mt-5' >{book && book[0].description}</div>
+          </div>
         </div>
       </div>
 

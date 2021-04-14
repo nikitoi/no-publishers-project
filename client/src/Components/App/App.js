@@ -14,6 +14,7 @@ import InfoBook from "../InfoBook/InfoBook"
 import PublishedBook from "../PublishedBook/PublishedBook"
 import BoughtBook from "../BoughtBook/BoughtBook"
 import Reader from '../Reader/Reader'
+import PurReader from '../PurReader/PurReader'
 import TestUpload from '../TestUpload/TestUpload'
 import BooksList from '../BooksList/BooksList'
 import Edit from '../Edit/Edit'
@@ -69,6 +70,9 @@ function App() {
             </Route>
             <Route path="/user/pub/:id/read">
               <Reader />
+            </Route>
+            <Route path="/user/pur/:id/read">
+              <PurReader />
             </Route>
             <Route path="/testupl">
               <TestUpload />

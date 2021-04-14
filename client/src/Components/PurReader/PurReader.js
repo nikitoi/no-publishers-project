@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom'
-import './Reader.scss'
+import './PurReader.scss'
 import { Document, Page, pdfjs } from 'react-pdf';
 import { fetchGetFile } from '../../redux/reduxThunk/asyncFunc'
 import firebase from 'firebase'
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
-export default function Reader() {
+export default function PurReader() {
 
   const params = useParams()
   const [book, setBook] = useState(null)
@@ -59,7 +59,7 @@ export default function Reader() {
 
   function prev() {
     setPageNumber((prev) => {
-      if (prev > showFrom) {
+      if (prev > 1) {
         return prev - 2
       } else {
         return prev
@@ -69,7 +69,7 @@ export default function Reader() {
 
   function next() {
     setPageNumber((prev) => {
-      if (prev < showTo) {
+      if (prev < numPages - 1) {
         return prev + 2
       } else {
         return prev
@@ -82,7 +82,7 @@ export default function Reader() {
 
   function prevOne() {
     setPageNumber((prev) => {
-      if (prev > showFrom) {
+      if (prev > 1) {
         return prev - 1
       } else {
         return prev
@@ -92,7 +92,7 @@ export default function Reader() {
 
   function nextOne() {
     setPageNumber((prev) => {
-      if (prev < showTo) {
+      if (prev < numPages) {
         return prev + 1
       } else {
         return prev
@@ -105,7 +105,7 @@ export default function Reader() {
 
 
   function lastPage(pageNumber) {
-    if (pageNumber < showTo) {
+    if (pageNumber < numPages) {
       return pageNumber + 1
     } else {
       return null
@@ -132,20 +132,20 @@ export default function Reader() {
           <button className="reader-prev reader-btn" onClick={prev}>&#8249;</button>
           <Document className="page"
             file={file}
-            // onLoadSuccess={onDocumentLoadSuccess}
+            onLoadSuccess={onDocumentLoadSuccess}
           >
             <Page pageNumber={pageNumber} />
           </Document>
 
           <Document className="page"
             file={file}
-            // onLoadSuccess={onDocumentLoadSuccess}
+            onLoadSuccess={onDocumentLoadSuccess}
           >
             <Page pageNumber={lastPage(pageNumber)} />
           </Document>
           <button className="reader-next reader-btn" onClick={next}>&#8250;</button>
         </div>
-        <p className="flex_center reader__pages-count">Page{pageNumber <  showTo ? `s ${pageNumber}-${pageNumber + 1}` : ` ${pageNumber}`} of {numPages}</p>
+        <p className="flex_center reader__pages-count">Page{pageNumber <  numPages ? `s ${pageNumber}-${pageNumber + 1}` : ` ${pageNumber}`} of {numPages}</p>
       </div>
 
       <div className="one-page box-invisible">
@@ -153,7 +153,7 @@ export default function Reader() {
           <button className="reader-prev reader-btn" onClick={prevOne}>&#8249;</button>
           <Document className="page"
             file={file}
-            // onLoadSuccess={onDocumentLoadSuccess}
+            onLoadSuccess={onDocumentLoadSuccess}
           >
             <Page pageNumber={pageNumber} />
           </Document>

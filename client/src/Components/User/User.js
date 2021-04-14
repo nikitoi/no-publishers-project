@@ -18,7 +18,6 @@ function User() {
     if(currentUser){
          firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
       setBooksNum(req.data()?.uplBooks?.length);
-      console.log(req.data(), currentUser.uid);
       return (
         req.data()?.uplBooks.map(el => {
           return (
@@ -35,8 +34,7 @@ function User() {
   // loadBooks()
   useEffect(() => {
 
-      loadBooks()
-      console.log('ddddddd', books);
+    loadBooks()
 
   }, [currentUser])
 
@@ -72,7 +70,7 @@ function User() {
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
               {books.length === booksNum && books.map(el => {
-                // console.log(books);
+                console.log(el);
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
                     <Link to={`/user/pub/${el[1]}`}><img className="slider-card_img" src={el[0].cover} alt="book" /></Link>

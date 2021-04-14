@@ -30,6 +30,10 @@
 
 .disabled {
   background-color: rgb(180, 139, 149)!important;
+
+  &:hover {
+    cursor: auto;
+  }
 }
 
 .box-invisible {

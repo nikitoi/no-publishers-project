@@ -1,93 +1,168 @@
-// import React, {useState} from 'react'
-// // Import the main component
-// import { Viewer } from '@react-pdf-viewer/core'; // install this library
-// // Plugins
-// import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'; // install this library
-// // Import the styles
-// import '@react-pdf-viewer/core/lib/styles/index.css';
-// import '@react-pdf-viewer/default-layout/lib/styles/index.css';
-// // Worker
-// import { Worker } from '@react-pdf-viewer/core'; // install this library
-
-function Reader(props) {
-
-  // // Create new plugin instance
-  // const defaultLayoutPluginInstance = defaultLayoutPlugin();
-  
-  // // for onchange event
-  // const [pdfFile, setPdfFile]=useState(null);
-  // const [pdfFileError, setPdfFileError]=useState('');
-
-  // // for submit event
-  // const [viewPdf, setViewPdf]=useState(null);
-
-  // // onchange event
-  // const fileType=['application/pdf'];
-  // const handlePdfFileChange=(e)=>{
-  //   let selectedFile=e.target.files[0];
-  //   if(selectedFile){
-  //     if(selectedFile&&fileType.includes(selectedFile.type)){
-  //       let reader = new FileReader();
-  //           reader.readAsDataURL(selectedFile);
-  //           reader.onloadend = (e) =>{
-  //             setPdfFile(e.target.result);
-  //             setPdfFileError('');
-  //           }
-  //     }
-  //     else{
-  //       setPdfFile(null);
-  //       setPdfFileError('Please select valid pdf file');
-  //     }
-  //   }
-  //   else{
-  //     console.log('select your file');
-  //   }
-  // }
-
-  // // form submit
-  // const handlePdfFileSubmit=(e)=>{
-  //   e.preventDefault();
-  //   if(pdfFile!==null){
-  //     setViewPdf(pdfFile);
-  //   }
-  //   else{
-  //     setViewPdf(null);
-  //   }
-  // }
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom'
+import './Reader.scss'
+import { Document, Page, pdfjs } from 'react-pdf';
+import { fetchGetFile } from '../../redux/reduxThunk/asyncFunc'
+import firebase from 'firebase'
+import { useDispatch, useSelector } from 'react-redux'
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
+export default function Reader() {
 
+  const params = useParams()
+  const [book, setBook] = useState(null)
 
-  // return (
-  //   <div className='container'>
-  //     <br></br>
+  const dispatch = useDispatch()
+  const { file } = useSelector(state => state)
+
+  const [showFrom, setShowFrom] = useState(null);
+  const [showTo, setShowTo] = useState(null);
+  const [numPages, setNumPages] = useState(null);
+
+  const [pageNumber, setPageNumber] = useState(1);
+  // const [file, setFile] = useState(null)
+
+  useEffect(() => {
     
-  //     <form className='form-group' onSubmit={handlePdfFileSubmit}>
-  //       <input type="file" className='form-control'
-  //         required onChange={handlePdfFileChange}
-  //       />
-  //       {pdfFileError&&<div className='error-msg'>{pdfFileError}</div>}
-  //       <br></br>
-  //       <button type="submit" className='btn btn-success btn-lg'>
-  //         UPLOAD
-  //       </button>
-  //     </form>
-  //     <br></br>
-  //     <h4>View PDF</h4>
-  //     <div className='pdf-container'>
-  //       {/* show pdf conditionally (if we have one)  */}
-  //       {viewPdf&&<><Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-  //         <Viewer fileUrl={viewPdf}
-  //           plugins={[defaultLayoutPluginInstance]} />
-  //     </Worker></>}
+    firebase.firestore()
+      .collection('books')
+      .doc(params.id)
+      .get()
+      .then(book1 => {
+        if (book1.exists)
+          setBook([book1.data(), book1.id])
+          dispatch(fetchGetFile(book1.data().backFileName))
+          console.log(book);
+          
+          setNumPages(Number(book1.data().demo[1]))
+          setPageNumber(Number(book1.data().demo[0]))
+          setShowFrom(Number(book1.data().demo[0]))
+          setShowTo(Number(book1.data().demo[1]))
+      })
 
-  //     {/* if we dont have pdf or viewPdf state is null */}
-  //     {!viewPdf&&<>No pdf file selected</>}
-  //     </div>
+  }, [])
     
+  //   // fetch('http://localhost:4000/read', {
+  //   //   method: 'POST',
+  //   //   responseType: 'blob',
+  //   //   headers: { 'Content-Type': 'Application/json' },
+  //   //   // headers: { 'Content-Type' : 'multipart/form-data' },
+  //   //   body: JSON.stringify({id: id})
+  //   // })
+  //   // .then(async res => res.blob([res.data], {type: 'application/pdf'}))
+  //   // .then(data => setFile(data))
 
-  //   </div>
-  // );
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+
+  function prev() {
+    setPageNumber((prev) => {
+      if (prev > showFrom) {
+        return prev - 2
+      } else {
+        return prev
+      }
+    })
+  }
+
+  function next() {
+    setPageNumber((prev) => {
+      if (prev < showTo) {
+        return prev + 2
+      } else {
+        return prev
+      }
+    })
+  }
+
+
+
+
+  function prevOne() {
+    setPageNumber((prev) => {
+      if (prev > showFrom) {
+        return prev - 1
+      } else {
+        return prev
+      }
+    })
+  }
+
+  function nextOne() {
+    setPageNumber((prev) => {
+      if (prev < showTo) {
+        return prev + 1
+      } else {
+        return prev
+      }
+    })
+  }
+
+
+
+
+
+  function lastPage(pageNumber) {
+    if (pageNumber < showTo) {
+      return pageNumber + 1
+    } else {
+      return null
+    }
+  }
+
+  function disabledChange() {
+    document.querySelector('.btn-one-page').classList.toggle('disabled')
+    document.querySelector('.btn-two-pages').classList.toggle('disabled')
+    document.querySelector('.one-page').classList.toggle('box-invisible')
+    document.querySelector('.two-pages').classList.toggle('box-invisible')
+  }
+
+  return (
+    <div className='background flex_center flex_column'>
+      <Link to={`/user/pub/${book && book[1]}`} className="reader_button"><button className='button' >Назад</button></Link>
+      <div className="reader_button_box">
+        <button onClick={disabledChange} className='button btn-one-page mr-4' >Показывать одну страницу</button>
+        <button onClick={disabledChange} className='button btn-two-pages mr-4 disabled' >Показывать две страницы</button>
+      </div>
+
+      <div className="two-pages">
+        <div className='flex_center'>
+          <button className="reader-prev reader-btn" onClick={prev}>&#8249;</button>
+          <Document className="page"
+            file={file}
+            // onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+
+          <Document className="page"
+            file={file}
+            // onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page pageNumber={lastPage(pageNumber)} />
+          </Document>
+          <button className="reader-next reader-btn" onClick={next}>&#8250;</button>
+        </div>
+        <p className="flex_center reader__pages-count">Page{pageNumber <  showTo ? `s ${pageNumber}-${pageNumber + 1}` : ` ${pageNumber}`} of {numPages}</p>
+      </div>
+
+      <div className="one-page box-invisible">
+        <div className='flex_center'>
+          <button className="reader-prev reader-btn" onClick={prevOne}>&#8249;</button>
+          <Document className="page"
+            file={file}
+            // onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+
+          <button className="reader-next reader-btn" onClick={nextOne}>&#8250;</button>
+        </div>
+        <p className="flex_center reader__pages-count">Page {pageNumber} of {numPages}</p>
+      </div>
+      
+    </div>
+  );
 }
-
-export default Reader;

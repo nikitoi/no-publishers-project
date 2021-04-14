@@ -23,3 +23,26 @@
 width: 2em!important;
 height: 2em!important;
 }
+
+.maindown__arrow {
+  font-size: 10em;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  position: relative;
+  top: 90px;
+  left: -5px;
+  transition: all .5s;
+  cursor: pointer;
+  opacity: .8;
+  transform: rotate(180deg);
+  z-index: 100;
+
+  &:hover {
+    top: 70px;
+  }
+}
+
+.arrow-up {
+  width: 3vw;
+}

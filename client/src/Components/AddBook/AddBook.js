@@ -50,7 +50,7 @@ function AddBook(props) {
       const pages = [e.target.from.value, e.target.to.value]
       const price = e.target.price.value
   
-      const uploadTask = firebase.storage().ref(`books/${image?.name}`).put(image);
+      const uploadTask = firebase.storage().ref(`books/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -68,7 +68,7 @@ function AddBook(props) {
           // complete function ...
           firebase.storage()
             .ref("books")
-            .child(image?.name)
+            .child(image.name)
             .getDownloadURL()
             .then((url) => {
               setUrl(url);
@@ -190,7 +190,7 @@ function AddBook(props) {
               <label className="color_dark pages_label">Показывать страницы </label>
               <input className='auth input num-input' min='1' name='from' type='number' required placeholder='с' />
               <div className="color_dark"> - </div>
-              <input className='auth input num-input' name='to' type='number' required placeholder='по' />
+              <input className='auth input num-input' min='1' name='to' type='number' required placeholder='по' />
             </div>
           </div>
 

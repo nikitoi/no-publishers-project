@@ -22,7 +22,7 @@ function BooksList(props) {
       <Slider {...settings}>
         {zaglushka.map(el => {
           return (
-            <div className="flex_center">
+            <div className="flex_center" key={Math.random()}>
               <img className="slider-card_img" src={el.image} alt="book" />
               <h6 className="slider-card_title slider-text">{el.title}</h6>
               <h6 className="slider-card_author slider-text">{el.author}</h6>
@@ -33,7 +33,7 @@ function BooksList(props) {
       <Slider {...settings}>
         {zaglushka.map(el => {
           return (
-            <div className="flex_center">
+            <div className="flex_center" key={Math.random()}>
               <img className="slider-card_img" src={el.image} alt="book" />
               <h6 className="slider-card_title slider-text">{el.title}</h6>
               <h6 className="slider-card_author slider-text">{el.author}</h6>

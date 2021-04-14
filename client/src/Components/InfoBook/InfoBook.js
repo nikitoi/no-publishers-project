@@ -33,7 +33,7 @@ function InfoBook(props) {
         </div>
       </div>
       <div className='buttonList'>
-        <button className='button buttonBook butlist mr-3' >Купить</button>
+        <button className='button buttonBook butlist mr-3' >Купить за {book?.price} &#8381;</button>
         <Link><button className='button buttonBook butlist' >Ознакомительная версия</button></Link>
       </div>
     </div>

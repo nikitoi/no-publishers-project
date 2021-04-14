@@ -70,12 +70,12 @@ function User() {
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
               {books.length === booksNum && books.map(el => {
-                console.log(el);
+                // console.log(books);
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
-                    <img className="slider-card_img" src={el.cover} alt="book" />
+                    <Link to={`/user/pub/${el._id}`}><img className="slider-card_img" src={el.cover} alt="book" /></Link>
                     <h6 className="slider-card_title slider-text">{el.title}</h6>
-                    <h6 className="slider-card_author slider-text">{el.author}</h6>
+                    <h6 className="slider-card_author slider-text">{el.bookauthor}</h6>
                   </div>
                 )
               })}
@@ -91,7 +91,7 @@ function User() {
               {zaglushka.map(el => {
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
-                    <img className="slider-card_img" src={el.image} alt="book" />
+                    <Link to={`/user/bought/${el._id}`}><img className="slider-card_img" src={el.image} alt="book" /></Link>
                     <h6 className="slider-card_title slider-text">{el.title}</h6>
                     <h6 className="slider-card_author slider-text">{el.author}</h6>
                   </div>

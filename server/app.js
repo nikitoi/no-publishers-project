@@ -40,7 +40,7 @@ app.post('/testupl', upload.any(), (req, res, next) => {
 app.post('/test', (req, res, next) => {
   // const fileName = req.body;
   const file = `./public/uploads/caec5cb6d778dd15a45c8bf9b89c1006`
-  const data = fs.readFileSync('./public/uploads/2abdbe81513ce69998d4b7210bbe2646');
+  const data = fs.readFileSync('./public/uploads/d4887de987532a0b8f145f93028353ec');
   // var stats = fs.statSync('./public/uploads/caec5cb6d778dd15a45c8bf9b89c1006')
   // console.log(stats);
 

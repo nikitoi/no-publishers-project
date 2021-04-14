@@ -46,6 +46,7 @@ function AddBook(props) {
       const pdfName = currStore.backFileName
 
       const title = e.target.title.value
+      const bookauthor = e.target.bookauthor.value
       const description = e.target.description.value
       const pages = [e.target.from.value, e.target.to.value]
       const price = e.target.price.value
@@ -77,6 +78,7 @@ function AddBook(props) {
               firebase.firestore()
                 .collection("books").add({
                   title,
+                  bookauthor,
                   description,
                   cover: url,
                   price,
@@ -162,6 +164,7 @@ function AddBook(props) {
         <form className='formAddBook modal_form' encType="multipart/form-data" method="post" action="/testupl" onSubmit={(e) => saveFile(e)}>
 
           <input className='auth input mb-1 wide-input color-light' name='title' type='text' required placeholder='Название книги' />
+          <input className='auth input mb-1 wide-input color-light' name='bookauthor' type='text' required placeholder='Автор' />
           <textarea className='auth input mb-1 input-textarea wide-input color-light' name='description' required type='text' placeholder='Описание' ></textarea>
 
           <div className="flex_center add-book_add-file wide-input">

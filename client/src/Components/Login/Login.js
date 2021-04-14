@@ -44,7 +44,7 @@ function Login() {
         )
       }
       history.push('/')
-      
+
     } catch (error) {
       setError(error.message)
       setLoading(false)

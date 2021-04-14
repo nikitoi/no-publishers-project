@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import zaglushka from '../BooksList/zaglushka'
+// import zaglushka from '../BooksList/zaglushka'
 import { Link } from 'react-router-dom'
 import './User.scss'
 import firebase from 'firebase'
@@ -7,23 +7,44 @@ import { useAuth } from "../../context/AuthContext";
 
 function User() {
   // const pubBook = ''
-  const [books, setBooks] = useState([])
-  const [booksNum, setBooksNum] = useState(null)
+  const [uplBooks, setuplBooks] = useState([])
+  const [purBooks, setpurBooks] = useState([])
 
-  const pubBook = [...zaglushka].splice(0, 5)
+  const [booksNum, setBooksNum] = useState(null)
+  const [booksNum1, setBooksNum1] = useState(null)
+  // const pubBook = [...zaglushka].splice(0, 5)
   const { currentUser } = useAuth()
 
-  function loadBooks(){
-    console.log('curr user',currentUser);
+  function uplBook(){
+    // console.log('curr user',currentUser);
     if(currentUser){
          firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
       setBooksNum(req.data()?.uplBooks?.length);
-      console.log(req.data(), currentUser.uid);
+      // console.log(req.data(), currentUser.uid);
       return (
         req.data()?.uplBooks.map(el => {
           return (
            firebase.firestore().collection('books').doc(el).get().then(req => {
-             setBooks((prev) => [...prev, [req.data(), req.id]])
+            setuplBooks((prev) => [...prev, [req.data(), req.id]])
+            })
+          )
+        })
+      )
+    })
+    }
+  }
+
+  function purBook(){
+    console.log('curr user',currentUser);
+    if(currentUser){
+         firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
+      setBooksNum1(req.data()?.purBooks?.length);
+      console.log(req.data(), currentUser.uid);
+      return (
+        req.data()?.purBooks.map(el => {
+          return (
+           firebase.firestore().collection('books').doc(el).get().then(req => {
+            setpurBooks((prev) => [...prev, [req.data(), req.id]])
             })
           )
         })
@@ -35,8 +56,9 @@ function User() {
   // loadBooks()
   useEffect(() => {
 
-      loadBooks()
-      console.log('ddddddd', books);
+    uplBook()
+    purBook()
+      console.log('ddddddd', uplBooks, purBooks );
 
   }, [currentUser])
 
@@ -71,7 +93,7 @@ function User() {
       <h4 className='h4office ml-5'>Опубликованные</h4>
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
-              {books.length === booksNum && books.map(el => {
+              {uplBooks.length === booksNum && uplBooks.map(el => {
                 // console.log(books);
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
@@ -90,7 +112,7 @@ function User() {
 
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
-              {zaglushka.map(el => {
+              {purBooks.map(el => {
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
                     <Link to={`/user/bought/${el[1]}`}><img className="slider-card_img" src={el.image} alt="book" /></Link>

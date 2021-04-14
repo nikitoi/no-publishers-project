@@ -11,6 +11,8 @@ import MainDown from '../MainDown/MainDown'
 import './App.scss'
 import AddBook from '../AddBook/AddBook'
 import InfoBook from "../InfoBook/InfoBook"
+import PublishedBook from "../PublishedBook/PublishedBook"
+import BoughtBook from "../BoughtBook/BoughtBook"
 import Reader from '../Reader/Reader'
 import TestReader from '../TestReader/TestReader'
 import TestUpload from '../TestUpload/TestUpload'
@@ -49,6 +51,12 @@ function App() {
             </Route>
             <Route path="/books/:id">
               <InfoBook />
+            </Route>
+            <Route path="/user/pub/:id">
+              <PublishedBook />
+            </Route>
+            <Route path="/user/bought/:id">
+              <BoughtBook />
             </Route>
             <Route path="/reader">
               <Reader />

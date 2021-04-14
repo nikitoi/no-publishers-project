@@ -72,7 +72,7 @@ function User() {
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
               {books.length === booksNum && books.map(el => {
-                console.log(el);
+                // console.log(books);
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
                     <Link to={`/user/pub/${el[1]}`}><img className="slider-card_img" src={el[0].cover} alt="book" /></Link>

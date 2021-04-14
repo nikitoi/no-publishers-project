@@ -48,7 +48,7 @@ function AddBook(props) {
       const pages = [pageFromInput, pageToInput]
       const price = priceInput
   
-      const uploadTask = firebase.storage().ref(`books/${image?.name}`).put(image);
+      const uploadTask = firebase.storage().ref(`books/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -66,7 +66,7 @@ function AddBook(props) {
           // complete function ...
           firebase.storage()
             .ref("books")
-            .child(image?.name)
+            .child(image.name)
             .getDownloadURL()
             .then((url) => {
               setUrl(url);

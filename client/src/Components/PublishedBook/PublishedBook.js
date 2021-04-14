@@ -70,11 +70,7 @@ function PublishedBook(props) {
         <button className='button buttonBook butlist' >Удалить</button>
       </div>
       <div className='buttonList pub_book_btn_box'>
-        {/* <PDFDownloadLink document={file} fileName={`${book && book[1]}.pdf`}> */}
-        {/* <Link to={file} target="_blank" download={`${book && book[1]}.pdf`}> */}
-          <button onClick={downloadPdf} className='button buttonBook butlist mr-3' >Скачать</button>
-        {/* </Link> */}
-        {/* </PDFDownloadLink> */}
+        <button onClick={downloadPdf} className='button buttonBook butlist mr-3' >Скачать</button>
         <Link to={`/user/pub/${book && book[1]}/read`}><button className='button buttonBook butlist' >Читать фрагмент</button></Link>
       </div>
     </div>

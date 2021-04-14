@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import './Reader.scss'
 import { Document, Page, pdfjs } from 'react-pdf';
 import { fetchGetFile } from '../../redux/reduxThunk/asyncFunc'
@@ -7,8 +7,6 @@ import firebase from 'firebase'
 import { useDispatch, useSelector } from 'react-redux'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-
-// import pdfFile from './sample.pdf';
 
 export default function Reader() {
 
@@ -33,9 +31,9 @@ export default function Reader() {
       .get()
       .then(book1 => {
         if (book1.exists)
-          setBook(book1.data())
+          setBook([book1.data(), book1.id])
           dispatch(fetchGetFile(book1.data().backFileName))
-          console.log(book1.data());
+          console.log(book);
           
           setNumPages(Number(book1.data().demo[1]))
           setPageNumber(Number(book1.data().demo[0]))
@@ -79,6 +77,33 @@ export default function Reader() {
     })
   }
 
+
+
+
+  function prevOne() {
+    setPageNumber((prev) => {
+      if (prev > showFrom) {
+        return prev - 1
+      } else {
+        return prev
+      }
+    })
+  }
+
+  function nextOne() {
+    setPageNumber((prev) => {
+      if (prev < showTo) {
+        return prev + 1
+      } else {
+        return prev
+      }
+    })
+  }
+
+
+
+
+
   function lastPage(pageNumber) {
     if (pageNumber < showTo) {
       return pageNumber + 1
@@ -87,26 +112,57 @@ export default function Reader() {
     }
   }
 
+  function disabledChange() {
+    document.querySelector('.btn-one-page').classList.toggle('disabled')
+    document.querySelector('.btn-two-pages').classList.toggle('disabled')
+    document.querySelector('.one-page').classList.toggle('box-invisible')
+    document.querySelector('.two-pages').classList.toggle('box-invisible')
+  }
+
   return (
     <div className='background flex_center flex_column'>
-      <div className='flex_center'>
-        <button className="reader-prev reader-btn" onClick={prev}>&#8249;</button>
-        <Document className="page"
-          file={file}
-          // onLoadSuccess={onDocumentLoadSuccess}
-        >
-          <Page pageNumber={pageNumber} />
-        </Document>
-
-        <Document className="page"
-          file={file}
-          // onLoadSuccess={onDocumentLoadSuccess}
-        >
-          <Page pageNumber={lastPage(pageNumber)} />
-        </Document>
-        <button className="reader-next reader-btn" onClick={next}>&#8250;</button>
+      <Link to={`/user/pub/${book && book[1]}`} className="reader_button"><button className='button' >Назад</button></Link>
+      <div className="reader_button_box">
+        <button onClick={disabledChange} className='button btn-one-page mr-4' >Показывать одну страницу</button>
+        <button onClick={disabledChange} className='button btn-two-pages mr-4 disabled' >Показывать две страницы</button>
       </div>
-      <p className="reader__pages-count">Page{pageNumber <  showTo ? `s ${pageNumber}-${pageNumber + 1}` : ` ${pageNumber}`} of {numPages}</p>
+
+      <div className="two-pages">
+        <div className='flex_center'>
+          <button className="reader-prev reader-btn" onClick={prev}>&#8249;</button>
+          <Document className="page"
+            file={file}
+            // onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+
+          <Document className="page"
+            file={file}
+            // onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page pageNumber={lastPage(pageNumber)} />
+          </Document>
+          <button className="reader-next reader-btn" onClick={next}>&#8250;</button>
+        </div>
+        <p className="flex_center reader__pages-count">Page{pageNumber <  showTo ? `s ${pageNumber}-${pageNumber + 1}` : ` ${pageNumber}`} of {numPages}</p>
+      </div>
+
+      <div className="one-page box-invisible">
+        <div className='flex_center'>
+          <button className="reader-prev reader-btn" onClick={prevOne}>&#8249;</button>
+          <Document className="page"
+            file={file}
+            // onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+
+          <button className="reader-next reader-btn" onClick={nextOne}>&#8250;</button>
+        </div>
+        <p className="flex_center reader__pages-count">Page {pageNumber} of {numPages}</p>
+      </div>
+      
     </div>
   );
 }

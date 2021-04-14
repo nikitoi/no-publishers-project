@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import firebase from 'firebase'
 import './InfoBook.scss'
 
@@ -18,7 +19,7 @@ function InfoBook(props) {
       })
 
   }, [setBook])
-  
+
   return (
     <div className='background flex_center flex_column'>
       <div className='bookWindow flex coverBig'>
@@ -33,7 +34,7 @@ function InfoBook(props) {
       </div>
       <div className='buttonList'>
         <button className='button buttonBook butlist mr-3' >Купить</button>
-        <button className='button buttonBook butlist' >Ознакомительная версия</button>
+        <Link><button className='button buttonBook butlist' >Ознакомительная версия</button></Link>
       </div>
     </div>
   );

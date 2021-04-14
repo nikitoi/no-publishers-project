@@ -52,11 +52,8 @@ function User() {
 
   // loadBooks()
   useEffect(() => {
-
     uplBook()
     purBook()
-    console.log('ddddddd', uplBooks, purBooks);
-
   }, [currentUser])
 
 
@@ -88,12 +85,11 @@ function User() {
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
               {uplBooks.length === booksNum && uplBooks.map(el => {
-                console.log(uplBooks);
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
-                    <Link to={`/user/pub/${el[1]}`}><img className="slider-card_img" src={el[0].cover} alt="book" /></Link>
-                    <h6 className="slider-card_title slider-text">{el[0].title}</h6>
-                    <h6 className="slider-card_author slider-text">{el[0].bookauthor}</h6>
+                    <Link to={`/user/pub/${el[1]}`}><img className="slider-card_img" src={el[0]?.cover} alt="book" /></Link>
+                    <h6 className="slider-card_title slider-text">{el[0]?.title}</h6>
+                    <h6 className="slider-card_author slider-text">{el[0]?.bookauthor}</h6>
                   </div>
                 )
               })}

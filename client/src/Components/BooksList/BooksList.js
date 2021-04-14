@@ -36,9 +36,10 @@ function BooksList(props) {
     
     return (
       <div className="background bookslist">
+        <h3>Новые книги</h3>
       <Slider {...settings}>
         {/* {console.log(id)} */}
-        {books?.map(el => {
+        {[...books]?.sort((a,b)=>b[0].timestamp - a[0].timestamp).map(el => {
           return (
             <div className="flex_center" key={Math.random()}>
               <Link to={`/books/${el[1]}`}><img className="slider-card_img" src={el[0].cover} alt="book" /></Link>
@@ -48,13 +49,15 @@ function BooksList(props) {
           )
         })}
       </Slider>
+      <h3>Любимые книги наших читателей</h3>
       <Slider {...settings}>
-        {books?.map(el => {
+        {console.log(books)}
+        {[...books]?.sort((a, b) => a[0].price - b[0].price)?.map(el => {
           return (
             <div className="flex_center" key={Math.random()}>
-              <img className="slider-card_img" src={el.cover} alt="book" />
-              <h6 className="slider-card_title slider-text">{el.title}</h6>
-              <h6 className="slider-card_author slider-text">{el.author}</h6>
+              <Link to={`/books/${el[1]}`}><img className="slider-card_img" src={el[0].cover} alt="book" /></Link>
+              <h6 className="slider-card_title slider-text">{el[0].title}</h6>
+              <h6 className="slider-card_author slider-text">{el[0].bookauthor}</h6>
             </div>
           )
         })}

@@ -10,12 +10,10 @@ import firebase from 'firebase'
 import { useAuth } from '../../context/AuthContext';
 
 
-function PublishedBook(props) {
+function PublishedBook() {
+
   const params = useParams()
-
   const { currentUser } = useAuth()
-  // console.log(params);
-
   const [book, setBook] = useState(null)
   const history = useHistory()
 
@@ -25,7 +23,6 @@ function PublishedBook(props) {
       .doc(params.id)
       .delete()
       .then(req => {
-        console.log(req)
         history.push('/user')
       })
 

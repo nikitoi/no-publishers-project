@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 // import { Document, Page, pdfjs } from 'react-pdf';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import download from 'downloadjs';
@@ -11,12 +10,10 @@ import firebase from 'firebase'
 import { useAuth } from '../../context/AuthContext';
 
 
-function PublishedBook(props) {
+function PublishedBook() {
+
   const params = useParams()
-
   const { currentUser } = useAuth()
-  // console.log(params);
-
   const [book, setBook] = useState(null)
   const history = useHistory()
 
@@ -26,7 +23,6 @@ function PublishedBook(props) {
       .doc(params.id)
       .delete()
       .then(req => {
-        console.log(req)
         history.push('/user')
       })
 

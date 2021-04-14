@@ -11,12 +11,10 @@ function User() {
   const [purBooks, setpurBooks] = useState([])
 
   const [booksNum, setBooksNum] = useState(null)
-  const [booksNum1, setBooksNum1] = useState(null)
-  // const pubBook = [...zaglushka].splice(0, 5)
+  // const [booksNum1, setBooksNum1] = useState(null)
   const { currentUser } = useAuth()
 
   function uplBook() {
-    // console.log('curr user',currentUser);
     if (currentUser) {
       firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
         setBooksNum(req.data()?.uplBooks?.length);
@@ -36,7 +34,7 @@ function User() {
   function purBook() {
     if (currentUser) {
       firebase.firestore().collection('users').doc(currentUser?.uid).get().then(req => {
-        setBooksNum1(req.data()?.purBooks?.length);
+        // setBooksNum1(req.data()?.purBooks?.length);
         return (
           req.data()?.purBooks.map(el => {
             return (
@@ -50,7 +48,6 @@ function User() {
     }
   }
 
-  // loadBooks()
   useEffect(() => {
     uplBook()
     purBook()

@@ -19,7 +19,6 @@ function BooksList(props) {
     slidesToScroll: Math.ceil(document.documentElement.clientWidth / 300)
   };
   
-  // const [id, setId] = useState('')
   const [books, setBooks] = useState([])
 
   useEffect(() => {
@@ -29,7 +28,6 @@ function BooksList(props) {
       .then((snap) => {
         snap.forEach(doc => {
           setBooks((prev) => [...prev, [doc.data(), doc.id]])
-          // setId((prev) => [...prev, doc.id])
         })
       })
     }, [setBooks])
@@ -38,7 +36,6 @@ function BooksList(props) {
       <div className="background bookslist">
         <h3>Новые книги</h3>
       <Slider {...settings}>
-        {/* {console.log(id)} */}
         {[...books]?.sort((a,b)=>b[0].timestamp - a[0].timestamp).map(el => {
           return (
             <div className="flex_center" key={Math.random()}>

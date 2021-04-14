@@ -1,5 +1,5 @@
 .bookslist {
-  min-height: 100vh;
+  min-height: 840px;
 }
 
 .slick-slider {
@@ -20,8 +20,22 @@
 .slider-card_img {
   max-height: 250px;
   max-width: 200px;
+  margin: 0 auto 10px;
 }
 
 .slider-text {
   color: rgb(110, 68, 78);
+  max-width: 200px;
+  max-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slick-prev {
+  top: 40%;
+}
+
+.slick-next {
+  top: 40%;
 }

@@ -17,19 +17,29 @@ export function AuthProvider({ children }) {
     return auth.createUserWithEmailAndPassword(email, password)
   }
 
-  // function login(email, password) {
-  //   return auth().signInWithEmailAndPassword(email, password)
-  // }
+  function login(email, password) {
+    return auth.signInWithEmailAndPassword(email, password)
+  }
 
   function logout() {
     return auth.signOut()
   }
 
-  function saveUserDB(userId, emailAddress, dateCreated, books = []) {
+  function saveUserDB(user, emailAddress, dateCreated, uplBooks = [], purBooks = []) {
     return firestore
       .collection('users')
+      .doc(user)
+      .set({
+        emailAddress, dateCreated, uplBooks, purBooks
+      });
+  }
+
+
+  function saveBookDB(title, description, cover, file, price, demo = [], backFileName) {
+    return firestore
+      .collection('books')
       .add({
-        userId, emailAddress, dateCreated, books
+        title, description, cover, file, price, demo, backFileName
       });
   }
 
@@ -44,10 +54,11 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
-    // login,
+    login,
     signup,
     logout,
-    saveUserDB
+    saveUserDB,
+    saveBookDB
   }
 
   return (

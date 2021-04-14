@@ -38,9 +38,7 @@ app.post('/testupl', upload.any(), (req, res, next) => {
 });
 
 app.post('/read', (req, res, next) => {
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
   const { id } = req.body;
-  console.log(id);
   const data = fs.readFileSync(`./public/uploads/${id}`);
   // var stats = fs.statSync('./public/uploads/caec5cb6d778dd15a45c8bf9b89c1006')
   // console.log(stats);

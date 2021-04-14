@@ -1,93 +1,112 @@
-// import React, {useState} from 'react'
-// // Import the main component
-// import { Viewer } from '@react-pdf-viewer/core'; // install this library
-// // Plugins
-// import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'; // install this library
-// // Import the styles
-// import '@react-pdf-viewer/core/lib/styles/index.css';
-// import '@react-pdf-viewer/default-layout/lib/styles/index.css';
-// // Worker
-// import { Worker } from '@react-pdf-viewer/core'; // install this library
-
-function Reader(props) {
-
-  // // Create new plugin instance
-  // const defaultLayoutPluginInstance = defaultLayoutPlugin();
-  
-  // // for onchange event
-  // const [pdfFile, setPdfFile]=useState(null);
-  // const [pdfFileError, setPdfFileError]=useState('');
-
-  // // for submit event
-  // const [viewPdf, setViewPdf]=useState(null);
-
-  // // onchange event
-  // const fileType=['application/pdf'];
-  // const handlePdfFileChange=(e)=>{
-  //   let selectedFile=e.target.files[0];
-  //   if(selectedFile){
-  //     if(selectedFile&&fileType.includes(selectedFile.type)){
-  //       let reader = new FileReader();
-  //           reader.readAsDataURL(selectedFile);
-  //           reader.onloadend = (e) =>{
-  //             setPdfFile(e.target.result);
-  //             setPdfFileError('');
-  //           }
-  //     }
-  //     else{
-  //       setPdfFile(null);
-  //       setPdfFileError('Please select valid pdf file');
-  //     }
-  //   }
-  //   else{
-  //     console.log('select your file');
-  //   }
-  // }
-
-  // // form submit
-  // const handlePdfFileSubmit=(e)=>{
-  //   e.preventDefault();
-  //   if(pdfFile!==null){
-  //     setViewPdf(pdfFile);
-  //   }
-  //   else{
-  //     setViewPdf(null);
-  //   }
-  // }
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'
+import './Reader.scss'
+import { Document, Page, pdfjs } from 'react-pdf';
+import { fetchGetFile } from '../../redux/reduxThunk/asyncFunc'
+import firebase from 'firebase'
+import { useDispatch, useSelector } from 'react-redux'
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
+// import pdfFile from './sample.pdf';
 
+export default function Reader() {
 
-  // return (
-  //   <div className='container'>
-  //     <br></br>
+  const params = useParams()
+  const [book, setBook] = useState(null)
+
+  const dispatch = useDispatch()
+  const { file } = useSelector(state => state)
+
+  const [showFrom, setShowFrom] = useState(null);
+  const [showTo, setShowTo] = useState(null);
+  const [numPages, setNumPages] = useState(null);
+
+  const [pageNumber, setPageNumber] = useState(1);
+  // const [file, setFile] = useState(null)
+
+  useEffect(() => {
     
-  //     <form className='form-group' onSubmit={handlePdfFileSubmit}>
-  //       <input type="file" className='form-control'
-  //         required onChange={handlePdfFileChange}
-  //       />
-  //       {pdfFileError&&<div className='error-msg'>{pdfFileError}</div>}
-  //       <br></br>
-  //       <button type="submit" className='btn btn-success btn-lg'>
-  //         UPLOAD
-  //       </button>
-  //     </form>
-  //     <br></br>
-  //     <h4>View PDF</h4>
-  //     <div className='pdf-container'>
-  //       {/* show pdf conditionally (if we have one)  */}
-  //       {viewPdf&&<><Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-  //         <Viewer fileUrl={viewPdf}
-  //           plugins={[defaultLayoutPluginInstance]} />
-  //     </Worker></>}
+    firebase.firestore()
+      .collection('books')
+      .doc(params.id)
+      .get()
+      .then(book1 => {
+        if (book1.exists)
+          setBook(book1.data())
+          dispatch(fetchGetFile(book1.data().backFileName))
+          console.log(book1.data());
+          
+          setNumPages(Number(book1.data().demo[1]))
+          setPageNumber(Number(book1.data().demo[0]))
+          setShowFrom(Number(book1.data().demo[0]))
+          setShowTo(Number(book1.data().demo[1]))
+      })
 
-  //     {/* if we dont have pdf or viewPdf state is null */}
-  //     {!viewPdf&&<>No pdf file selected</>}
-  //     </div>
+  }, [])
     
+  //   // fetch('http://localhost:4000/read', {
+  //   //   method: 'POST',
+  //   //   responseType: 'blob',
+  //   //   headers: { 'Content-Type': 'Application/json' },
+  //   //   // headers: { 'Content-Type' : 'multipart/form-data' },
+  //   //   body: JSON.stringify({id: id})
+  //   // })
+  //   // .then(async res => res.blob([res.data], {type: 'application/pdf'}))
+  //   // .then(data => setFile(data))
 
-  //   </div>
-  // );
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+
+  function prev() {
+    setPageNumber((prev) => {
+      if (prev > showFrom) {
+        return prev - 2
+      } else {
+        return prev
+      }
+    })
+  }
+
+  function next() {
+    setPageNumber((prev) => {
+      if (prev < showTo) {
+        return prev + 2
+      } else {
+        return prev
+      }
+    })
+  }
+
+  function lastPage(pageNumber) {
+    if (pageNumber < showTo) {
+      return pageNumber + 1
+    } else {
+      return null
+    }
+  }
+
+  return (
+    <div className='background flex_center flex_column'>
+      <div className='flex_center'>
+        <button className="reader-prev reader-btn" onClick={prev}>&#8249;</button>
+        <Document className="page"
+          file={file}
+          // onLoadSuccess={onDocumentLoadSuccess}
+        >
+          <Page pageNumber={pageNumber} />
+        </Document>
+
+        <Document className="page"
+          file={file}
+          // onLoadSuccess={onDocumentLoadSuccess}
+        >
+          <Page pageNumber={lastPage(pageNumber)} />
+        </Document>
+        <button className="reader-next reader-btn" onClick={next}>&#8250;</button>
+      </div>
+      <p className="reader__pages-count">Page{pageNumber <  showTo ? `s ${pageNumber}-${pageNumber + 1}` : ` ${pageNumber}`} of {numPages}</p>
+    </div>
+  );
 }
-
-export default Reader;

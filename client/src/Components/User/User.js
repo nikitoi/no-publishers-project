@@ -22,7 +22,9 @@ function User() {
       return (
         req.data()?.uplBooks.map(el => {
           return (
-           firebase.firestore().collection('books').doc(el).get().then(req => setBooks((prev) => [...prev, req.data()]))
+           firebase.firestore().collection('books').doc(el).get().then(req => {
+             setBooks((prev) => [...prev, [req.data(), req.id]])
+            })
           )
         })
       )
@@ -73,9 +75,9 @@ function User() {
                 console.log(el);
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
-                    <img className="slider-card_img" src={el.cover} alt="book" />
-                    <h6 className="slider-card_title slider-text">{el.title}</h6>
-                    <h6 className="slider-card_author slider-text">{el.author}</h6>
+                    <Link to={`/user/pub/${el[1]}`}><img className="slider-card_img" src={el[0].cover} alt="book" /></Link>
+                    <h6 className="slider-card_title slider-text">{el[0].title}</h6>
+                    <h6 className="slider-card_author slider-text">{el[0].bookauthor}</h6>
                   </div>
                 )
               })}
@@ -91,7 +93,7 @@ function User() {
               {zaglushka.map(el => {
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>
-                    <img className="slider-card_img" src={el.image} alt="book" />
+                    <Link to={`/user/bought/${el[1]}`}><img className="slider-card_img" src={el.image} alt="book" /></Link>
                     <h6 className="slider-card_title slider-text">{el.title}</h6>
                     <h6 className="slider-card_author slider-text">{el.author}</h6>
                   </div>

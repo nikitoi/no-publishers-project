@@ -34,7 +34,7 @@ function Login() {
       setLoading(true)
       var provider = new firebase.auth.GoogleAuthProvider()
       const { user } = await firebase.auth().signInWithPopup(provider)
-      
+
       let userExists = await firebase.firestore().collection('users').doc(user.uid).get().then(req => console.log(req.exists))
       if (!userExists) {
         await saveUserDB(

@@ -102,7 +102,7 @@ function AddBook(props) {
                       .update({ uplBooks: firebase.firestore.FieldValue.arrayUnion(book.id) })
                       // .set({ uplBooks: firebase.firestore.FieldValue.arrayUnion(book.id) }, {merge: true})
     
-                  }).then((res)=> console.log(res)).catch(err => console.log(err.message))
+                  }).then(()=> history.push('/user')).catch(err => console.log(err.message))
                 
   
               setProgress(0);
@@ -112,7 +112,7 @@ function AddBook(props) {
         }
       );
 
-    history.push('/user')
+    
     // window.location = '/user'
 
     // let formData = new FormData()

@@ -28,8 +28,13 @@ const upload = multer({
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(express.static(path.resolve('../client/build'))) //deploy
 app.use(cors())
 app.use('/students', studentsRouter)
+
+app.get('*', (res, req) => {
+  res.sendFile(path.resolve('../client/build/index.html')) //unregistered routes
+})
 
 app.post('/testupl', upload.any(), (req, res, next) => {
   const file = req.files;

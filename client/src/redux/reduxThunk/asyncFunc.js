@@ -15,15 +15,15 @@ export const fetchAddFile = (file) => {
 }}
 
 // инициализирует студентов
-export const fetchGetFile = () => {
+export const fetchGetFile = (id) => {
   return (dispatch) => {
     // fetch(process.env.REACT_APP_GETFILE_URL, {
-      fetch('http://localhost:4000/test', { 
+      fetch('http://localhost:4000/read', { 
       
       method: 'POST',
-      responseType: 'blob'
-      // headers: { 'Content-Type' : 'multipart/form-data' },
-      // body: 1
+      responseType: 'blob',
+      headers: { 'Content-Type' : 'Application/json' },
+      body: JSON.stringify({id: id})
     })
     .then(async res => res.blob([res.data], {type: 'application/pdf'}))
     // .then(data => setFile(data))

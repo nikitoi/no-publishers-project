@@ -11,17 +11,19 @@ import MainDown from '../MainDown/MainDown'
 import './App.scss'
 import AddBook from '../AddBook/AddBook'
 import InfoBook from "../InfoBook/InfoBook"
+import PublishedBook from "../PublishedBook/PublishedBook"
+import BoughtBook from "../BoughtBook/BoughtBook"
 import Reader from '../Reader/Reader'
-import TestReader from '../TestReader/TestReader'
 import TestUpload from '../TestUpload/TestUpload'
 import BooksList from '../BooksList/BooksList'
+import Edit from '../Edit/Edit'
 import { Provider } from 'react-redux'
 import store from '../../redux/store'
 
 function App() {
 
   const history = useHistory()
-  console.log(history?.location, 'hiiiiisssss')
+ 
   return (
     <Provider store={store}>
       <Router>
@@ -38,7 +40,7 @@ function App() {
             <Route path="/signup">
               <SignUp />
             </Route>
-            <Route path="/user">
+            <Route exact path="/user">
               <User />
             </Route>
             <Route path="/:id/addbook">
@@ -50,14 +52,23 @@ function App() {
             <Route path="/books/:id">
               <InfoBook />
             </Route>
+            <Route exact path="/user/pub/:id">
+              <PublishedBook />
+            </Route>
+            <Route path="/user/bought/:id">
+              <BoughtBook />
+            </Route>
+            <Route path="/user/edit/:id">
+              <Edit />
+            </Route>
             <Route path="/reader">
               <Reader />
             </Route>
             <Route path="/books">
               <BooksList />
             </Route>
-            <Route path="/test">
-              <TestReader />
+            <Route path="/user/pub/:id/read">
+              <Reader />
             </Route>
             <Route path="/testupl">
               <TestUpload />

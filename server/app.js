@@ -37,10 +37,9 @@ app.post('/testupl', upload.any(), (req, res, next) => {
   res.json(file[0].filename);
 });
 
-app.post('/test', (req, res, next) => {
-  // const fileName = req.body;
-  const file = `./public/uploads/caec5cb6d778dd15a45c8bf9b89c1006`
-  const data = fs.readFileSync('./public/uploads/2abdbe81513ce69998d4b7210bbe2646');
+app.post('/read', (req, res, next) => {
+  const { id } = req.body;
+  const data = fs.readFileSync(`./public/uploads/${id}`);
   // var stats = fs.statSync('./public/uploads/caec5cb6d778dd15a45c8bf9b89c1006')
   // console.log(stats);
 

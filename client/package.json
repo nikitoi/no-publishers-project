@@ -5,10 +5,12 @@
   "dependencies": {
     "@react-pdf-viewer/core": "^2.4.1",
     "@react-pdf-viewer/default-layout": "^2.4.1",
+    "@react-pdf/renderer": "^2.0.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.6.0",
+    "downloadjs": "^1.4.7",
     "firebase": "^8.3.3",
     "node-sass": "^5.0.0",
     "pdfjs-dist": "^2.6.347",

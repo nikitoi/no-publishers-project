@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-// import { Document, Page, pdfjs } from 'react-pdf';
-import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import download from 'downloadjs';
 import '../InfoBook/InfoBook'
 import './PublishedBook.scss'
@@ -46,18 +44,6 @@ function PublishedBook() {
   }, [setBook])
 
   const [file, setFile] = useState(null)
-
-  // useEffect(() => {
-    // fetch('http://localhost:4000/read', {
-    //   method: 'POST',
-    //   responseType: 'blob',
-    //   headers: { 'Content-Type': 'Application/json' },
-    //   // headers: { 'Content-Type' : 'multipart/form-data' },
-    //   body: JSON.stringify({id: book?.backFileName})
-    // })
-    // .then(async res => res.blob([res.data], {type: 'application/pdf'}))
-    // .then(data => setFile(data))
-  // }, [])
 
   function downloadPdf(){
 

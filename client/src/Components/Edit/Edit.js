@@ -55,9 +55,7 @@ function Edit(props) {
           <textarea ref={description} className='auth input mb-1 input-textarea wide-input color-light textarea-edit' name='description' required defaultValue={book?.description} type='text' placeholder='Описание' ></textarea>
           <label htmlFor="title" className="color_darker">Цена в &#8381;</label>
           <input ref={price} className='auth input mb-1 wide-input color-light' name='price' type='number' placeholder='Укажите ценник в рублях' required defaultValue={book?.price} />
-          {/* <Link to='/user'> */}
           <button type="submit" className='button buttonBook butlist' >Сохранить изменения</button>
-          {/* </Link> */}
         </form>
       </div>
     </div>

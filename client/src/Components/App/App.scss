@@ -9,11 +9,7 @@ html {
 }
 
 a {
-  outline: none;
-}
-
-.background{
-  // background-color: black;
+  outline: none!important;
 }
 
 .link {
@@ -102,7 +98,6 @@ canvas{
 
 .background {
   background-image: linear-gradient(180deg, rgb(228, 183, 168), rgb(165, 133, 141));
-  // box-shadow: 0 10px 10px 10px rgba(34, 60, 80, 0.6) inset;
   min-height: calc(100vh - 120px);
 }
 
@@ -117,13 +112,11 @@ canvas{
 
   &:hover {
     background-color: rgb(116, 72, 82);
-    // color: #fddcd0d5;
   }
 }
 
 .flex_center {
   display: flex;
-  // flex-direction: column;
   justify-content: center;
   align-items: center;
 }

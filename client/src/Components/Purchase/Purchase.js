@@ -33,16 +33,6 @@ function Purchase(props) {
 
   }, [setBook])
 
-
-  /////////////
-
-
-
-
-
-  /////////////
-
-
   return (
     <div className='background flex_center flex_column pt-5 purchase'>
       <div className="purchase-box">
@@ -54,20 +44,14 @@ function Purchase(props) {
         </div>
 
         <div className='form-purchase-box'>
-          {/* Сайт https://yoomoney.ru/quickpay/form */}
 
           <form className="form-purchase">
-            {/* <input type="hidden" name="name" value="Имя на карте" /> */}
             <div className="color_dark mb-3 pur_name pur_input"></div>
-            {/* <input type="hidden"  name="card-num" value="41001xxxxxxxxxxxx" /> */}
             <div className="color_dark mb-3 pur_card-num pur_input"></div>
             <div className="flex_row justify-between">
-              {/* <input type="hidden"  name="exp-month" value="" /> */}
               <div className="flex_row mt-5">
                 <div className="color_dark pur_month pur_input"></div>
-                {/* <input type="hidden"  name="exp-year" value="" /> */}
                 <div className="color_dark pur_year pur_input"></div>
-                {/* <input type="hidden"  name="cvc" value="CVC" /> */}
               </div >
               <div className="color_dark mt-5 pur_cvc pur_input"></div>
             </div>

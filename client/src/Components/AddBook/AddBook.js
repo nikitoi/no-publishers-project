@@ -130,7 +130,7 @@ function AddBook(props) {
   return (
     <div className='background  flex_center'>
       <div className="wrapper-white">
-        <progress value={progress} max="100" />
+        
         <form className='formAddBook modal_form' encType="multipart/form-data" method="post" action="/testupl" onSubmit={(e) => saveFile(e)}>
 
           <input className='auth input mb-1 wide-input color-light' name='title' type='text' required placeholder='Название книги' />
@@ -150,6 +150,7 @@ function AddBook(props) {
             <div className="color_dark mb-1 add-book_label">{pdfName}</div>
             <input type="button" className="file_input input mb-1 color-light" id="loadFileXml" value=".pdf" onClick={pickFile} />
           </div>
+          <progress value={progress} max="100" />
 
           <input className='auth input mb-1 wide-input color-light' name='price' type='number' required placeholder='Укажите ценник в рублях' />
 

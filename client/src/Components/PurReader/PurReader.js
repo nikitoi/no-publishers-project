@@ -41,16 +41,6 @@ export default function PurReader() {
       })
 
   }, [])
-    
-  //   // fetch('http://localhost:4000/read', {
-  //   //   method: 'POST',
-  //   //   responseType: 'blob',
-  //   //   headers: { 'Content-Type': 'Application/json' },
-  //   //   // headers: { 'Content-Type' : 'multipart/form-data' },
-  //   //   body: JSON.stringify({id: id})
-  //   // })
-  //   // .then(async res => res.blob([res.data], {type: 'application/pdf'}))
-  //   // .then(data => setFile(data))
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -77,8 +67,6 @@ export default function PurReader() {
   }
 
 
-
-
   function prevOne() {
     setPageNumber((prev) => {
       if (prev > 1) {
@@ -100,9 +88,6 @@ export default function PurReader() {
   }
 
 
-
-
-
   function lastPage(pageNumber) {
     if (pageNumber < numPages) {
       return pageNumber + 1
@@ -120,7 +105,7 @@ export default function PurReader() {
 
   return (
     <div className='background flex_center flex_column'>
-      {/* <Link to={`/user/pub/${book && book[1]}`} className="reader_button"><button className='button' >Назад</button></Link> */}
+      
       <div className="reader_button_box">
         <button onClick={disabledChange} className='button btn-one-page mr-4' >Показывать одну страницу</button>
         <button onClick={disabledChange} className='button btn-two-pages mr-4 disabled' >Показывать две страницы</button>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {fetchAddFile} from '../../redux/reduxThunk/asyncFunc'
+import { fetchAddFile } from '../../redux/reduxThunk/asyncFunc'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useAuth } from "../../context/AuthContext";
@@ -39,80 +39,78 @@ function AddBook(props) {
       .then(res => res.json())
       .then(data => pdfBack = data)
 
-    
+
     // dispatch(fetchAddFile(formData))
 
-      const currStore = store.getState()
-      const pdfName = currStore.backFileName
+    const currStore = store.getState()
+    const pdfName = currStore.backFileName
 
-      const title = e.target.title.value
-      const bookauthor = e.target.bookauthor.value
-      const description = e.target.description.value
-      const pages = [e.target.from.value, e.target.to.value]
-      const price = e.target.price.value
-  
-      const uploadTask = firebase.storage().ref(`books/${image?.name}`).put(image);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // progress function ...
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setProgress(progress);
-        },
-        (error) => {
-          // Error function ...
-          console.log(error);
-        },
-        () => {
-          // complete function ...
-          firebase.storage()
-            .ref("books")
-            .child(image?.name)
-            .getDownloadURL()
-            .then((url) => {
-              setUrl(url);
-  
-              // post image inside db
-              firebase.firestore()
-                .collection("books").add({
-                  title,
-                  bookauthor,
-                  description,
-                  cover: url,
-                  price,
-                  demo: pages,
-                  backFileName: pdfBack,
-                  caption: caption,
-                  author: currentUser.displayName,
-                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                })
+    const title = e.target.title.value
+    const bookauthor = e.target.bookauthor.value
+    const description = e.target.description.value
+    const pages = [e.target.from.value, e.target.to.value]
+    const price = e.target.price.value
 
-                  .then(book => {
-                    // push id to user
-                    // console.log(book.id);
-                    console.log(currentUser.uid);
-    
-                    return firebase.firestore()
-                      .collection('users')
-                      // .where('userId', '==', currentUser.uid)
-                      // .get()
-                      .doc(currentUser.uid)
-                      .update({ uplBooks: firebase.firestore.FieldValue.arrayUnion(book.id) })
-                      // .set({ uplBooks: firebase.firestore.FieldValue.arrayUnion(book.id) }, {merge: true})
-    
-                  }).then((res)=> console.log(res)).catch(err => console.log(err.message))
-                
-  
-              setProgress(0);
-              setCaption("");
-              setImage(null);
-            });
-        }
-      );
+    const uploadTask = firebase.storage().ref(`books/${image?.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // progress function ...
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      (error) => {
+        // Error function ...
+        console.log(error);
+      },
+      () => {
+        // complete function ...
+        firebase.storage()
+          .ref("books")
+          .child(image?.name)
+          .getDownloadURL()
+          .then((url) => {
+            setUrl(url);
 
-    history.push('/user')
+            // post image inside db
+            firebase.firestore()
+              .collection("books").add({
+                title,
+                bookauthor,
+                description,
+                cover: url,
+                price,
+                demo: pages,
+                backFileName: pdfBack,
+                caption: caption,
+                author: currentUser.displayName,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              })
+
+              .then(book => {
+                // push id to user
+                // console.log(book.id);
+                console.log(currentUser.uid);
+
+                return firebase.firestore()
+                  .collection('users')
+                  // .where('userId', '==', currentUser.uid)
+                  // .get()
+                  .doc(currentUser.uid)
+                  .update({ uplBooks: firebase.firestore.FieldValue.arrayUnion(book.id) })
+                // .set({ uplBooks: firebase.firestore.FieldValue.arrayUnion(book.id) }, {merge: true})
+              }).then((res) => history.push('/user')).catch(err => console.log(err.message))
+
+
+            setProgress(0);
+            setCaption("");
+            setImage(null);
+          });
+      }
+    );
+
     // window.location = '/user'
 
     // let formData = new FormData()

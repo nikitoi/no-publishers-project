@@ -48,7 +48,6 @@ function BooksList(props) {
       </Slider>
       <h3 className='h3Booklist'>Любимые книги наших читателей</h3>
       <Slider {...settings}>
-        {console.log(books)}
         {[...books]?.sort((a, b) => a[0].price - b[0].price)?.map(el => {
           return (
             <div className="flex_center" key={Math.random()}>

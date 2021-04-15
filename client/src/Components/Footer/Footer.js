@@ -7,7 +7,7 @@ function Footer(props) {
   return (
     <nav className="footer">
       <ul className="footer__links flex_row">
-        <li className="copyright footer__box">&#169; 2021 Editeur</li>
+        <li className="copyright footer__box">&#169; {new Date().getFullYear()} Éditeur</li>
         <li className="footer__box flex_center">
           <Link to="/" className="footer__link text-center">Главная</Link>
           <Link to="/books" className="footer__link text-center">Книги</Link>

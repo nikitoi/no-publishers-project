@@ -7,7 +7,7 @@ function MainUp(props) {
       <a name="mainup">
       <div className="mainup__title">
         <h1 className="mainup__title_header">Пиши</h1>
-        <p className="mainup__title_text">продавай</p>
+        <p className="mainup__title_text">Публикуй</p>
       </div>
       <div className="mainup__image">
         <img className="mainup__image_img" src="./images/typewriter.png" alt="Печатная машинка" />

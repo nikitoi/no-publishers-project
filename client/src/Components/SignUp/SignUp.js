@@ -27,7 +27,7 @@ function SignUp() {
       setError('')
       setLoading(true)
       const newUser = await signup(emailRef.current.value, passwordRef.current.value)
-      
+
       await saveUserDB(
         newUser.user.uid,
         emailRef.current.value,

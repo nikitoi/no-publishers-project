@@ -9,7 +9,7 @@ function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const history = useHistory();
-  const { saveUserDB, login, currentUser } = useAuth();
+  const { saveUserDB, login } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -35,14 +35,20 @@ function Login() {
       var provider = new firebase.auth.GoogleAuthProvider()
       const { user } = await firebase.auth().signInWithPopup(provider)
 
-      let userExists = await firebase.firestore().collection('users').doc(user.uid).get().then(req => console.log(req.exists))
-      if (!userExists) {
-        await saveUserDB(
-          user.uid,
-          user.email,
-          Date.now(),
-        )
-      }
+      await firebase.firestore()
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then(req => {
+          if (!req.exists) {
+            saveUserDB(
+              user.uid,
+              user.email,
+              Date.now()
+            )
+          }
+        })
+
       history.push('/')
 
     } catch (error) {

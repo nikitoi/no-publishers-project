@@ -31,7 +31,7 @@ function AddBook(props) {
 
     e.preventDefault()
 
-    fetch('http://localhost:4000/testupl', {
+    fetch(process.env.REACT_APP_SERVER_URL+'/upl', {
       method: 'POST',
       // headers: { 'Content-Type' : 'multipart/form-data' },
       body: formData

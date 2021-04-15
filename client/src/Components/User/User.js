@@ -6,7 +6,7 @@ import firebase from 'firebase'
 import { useAuth } from "../../context/AuthContext";
 
 function User() {
-  // const pubBook = ''
+
   const [uplBooks, setuplBooks] = useState([])
   const [purBooks, setpurBooks] = useState([])
 
@@ -102,7 +102,6 @@ function User() {
           <div className="bookWindow blockBooks1 flex_center" >
             <div className="books-box">
               {purBooks.map(el => {
-                console.log('3333', purBooks);
                 
                 return (
                   <div key={Math.random()} className='oneBook flex_center flex_column'>

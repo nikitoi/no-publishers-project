@@ -1,0 +1,67 @@
+.purchase-box {
+  background-color: #fddcd0d5;
+  padding: 2em;
+  position: relative;
+}
+
+.purchase__book-info {
+  width: 50vw;
+}
+
+.purchase__book-img {
+  height: 16em;
+}
+
+.form-purchase-box {
+  width: 30em;
+  height: 15em;
+  background-color: rgb(173, 125, 136);
+  margin: 2em auto;
+}
+
+.form-purchase {
+  padding: 1em;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.pur_input {
+  background-color: #fddcd0d5;
+  height: 2em;
+}
+
+.pur_name {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.pur_card-num {
+  width: 100%;
+}
+
+.pur_month {
+  width: 5em;
+  margin-right: 1em;
+}
+
+.pur_year {
+  width: 5em;
+}
+
+.pur_cvc {
+  width: 5em;
+}
+
+.purchase__btn-box {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+}
+
+.purchase__btn {
+  // margin: 0 auto;
+}
+
+

@@ -1,18 +1,83 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import firebase from 'firebase'
+import { useAuth } from '../../context/AuthContext';
+import './Purchase.scss'
 
 function Purchase(props) {
+
+  const params = useParams()
+  const { currentUser } = useAuth()
+  const [book, setBook] = useState(null)
+  const history = useHistory()
+
+  function buyBook() {
+    firebase.firestore()
+      .collection('users')
+      .doc(currentUser.uid)
+      .update({ purBooks: firebase.firestore.FieldValue.arrayUnion(params.id) })
+
+    history.push('/user')
+  }
+
+  useEffect(() => {
+    firebase.firestore()
+      .collection('books')
+      .doc(params.id)
+      .get()
+      .then(book1 => {
+        if (book1.exists)
+          setBook([book1.data(), book1.id])
+      })
+
+  }, [setBook])
+
+
+  /////////////
+
+
+
+
+
+  /////////////
+
+
   return (
-    <div className='background'>
-      <div className='bookWindow'>
-        <img src='' alt='' />
-        <div className='bookInfo'>
-          <h4 className='titleBook' >Название </h4>
-          <h6 className='authorBook' >Автор </h6>
+    <div className='background flex_center flex_column pt-5 purchase'>
+      <div className="purchase-box">
+
+        <div className='purchase__book-info color_dark'>
+          <h4 className='purchase__title-book mb-4'>Вы собираетесь купить книгу "{book && book[0].title}"</h4>
+          <h6 className='purchase__author-book' >Автора {book && book[0].bookauthor}</h6>
+          <div>Сумма к оплате {book && book[0].price} &#8381;</div>
         </div>
-        <div className='formPurchase'>
-          Здесь форма оплаты картой 
-          {/* Сайт https://yoomoney.ru/quickpay/form */}
+
+        <div className='form-purchase-box'>
+            {/* Сайт https://yoomoney.ru/quickpay/form */}
+
+          <form className="form-purchase">
+            {/* <input type="hidden" name="name" value="Имя на карте" /> */}
+            <div className="color_dark mb-3 pur_name pur_input"></div>
+            {/* <input type="hidden"  name="card-num" value="41001xxxxxxxxxxxx" /> */}
+            <div className="color_dark mb-3 pur_card-num pur_input"></div>
+            <div className="flex_row justify-between">
+              {/* <input type="hidden"  name="exp-month" value="" /> */}
+              <div className="flex_row mt-5">
+                <div className="color_dark pur_month pur_input"></div>
+                {/* <input type="hidden"  name="exp-year" value="" /> */}
+                <div className="color_dark pur_year pur_input"></div>
+                {/* <input type="hidden"  name="cvc" value="CVC" /> */}
+              </div >
+              <div className="color_dark mt-5 pur_cvc pur_input"></div>
+            </div>
+          </form>
+
         </div>
+
+        <div className='purchase__btn-box'>
+          <button onClick={buyBook} className='button butlist mr-3 purchase__btn' >Купить</button>
+        </div>
+
       </div>
     </div>
   );

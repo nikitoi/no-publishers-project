@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {fetchAddFile} from '../../redux/reduxThunk/asyncFunc'
+import { fetchAddFile } from '../../redux/reduxThunk/asyncFunc'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useAuth } from "../../context/AuthContext";
@@ -31,7 +31,7 @@ function AddBook(props) {
 
     e.preventDefault()
 
-    fetch('http://localhost:4000/testupl', {
+    fetch(process.env.REACT_APP_SERVER_URL+'/upl', {
       method: 'POST',
       // headers: { 'Content-Type' : 'multipart/form-data' },
       body: formData
@@ -39,7 +39,7 @@ function AddBook(props) {
       .then(res => res.json())
       .then(data => pdfBack = data)
 
-    
+
     // dispatch(fetchAddFile(formData))
 
       const currStore = store.getState()
@@ -193,7 +193,7 @@ function AddBook(props) {
               <label className="color_dark pages_label">Показывать страницы </label>
               <input className='auth input num-input' min='1' name='from' type='number' required placeholder='с' />
               <div className="color_dark"> - </div>
-              <input className='auth input num-input' name='to' type='number' required placeholder='по' />
+              <input className='auth input num-input' min='1' name='to' type='number' required placeholder='по' />
             </div>
           </div>
 

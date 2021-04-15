@@ -22,7 +22,7 @@ function BoughtBook(props) {
 
   function downloadPdf(){
 
-    fetch('http://localhost:4000/read', {
+    fetch(process.env.REACT_APP_SERVER_URL+'/read', {
       method: 'POST',
       responseType: 'blob',
       headers: { 'Content-Type': 'Application/json' },

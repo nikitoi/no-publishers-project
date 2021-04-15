@@ -31,7 +31,7 @@ app.use(express.json())
 app.use(cors())
 app.use('/students', studentsRouter)
 
-app.post('/testupl', upload.any(), (req, res, next) => {
+app.post('/upl', upload.any(), (req, res, next) => {
   const file = req.files;
   console.log(file);
   res.json(file[0].filename);

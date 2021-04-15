@@ -6,7 +6,7 @@ function MainUp(props) {
     <div className="mainup">
       <a name="mainup">
       <div className="mainup__title">
-        <h1 className="mainup__title_header">стань Писателем</h1>
+        <h1 className="mainup__title_header">Стань Писателем</h1>
         <h5 className="mainup__title_text">всего в один клик</h5>
       </div>
       <div className="mainup__image">

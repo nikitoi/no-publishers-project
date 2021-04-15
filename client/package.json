@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@google-pay/button-react": "^2.3.0",
     "@react-pdf-viewer/core": "^2.4.1",
     "@react-pdf-viewer/default-layout": "^2.4.1",
     "@react-pdf/renderer": "^2.0.4",

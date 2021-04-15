@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import firebase from 'firebase'
 import { useAuth } from '../../context/AuthContext';
+import GooglePayButton from '@google-pay/button-react';
 import './Purchase.scss'
 
 function Purchase(props) {
@@ -32,16 +33,6 @@ function Purchase(props) {
 
   }, [setBook])
 
-
-  /////////////
-
-
-
-
-
-  /////////////
-
-
   return (
     <div className='background flex_center flex_column pt-5 purchase'>
       <div className="purchase-box">
@@ -53,25 +44,73 @@ function Purchase(props) {
         </div>
 
         <div className='form-purchase-box'>
-            {/* Сайт https://yoomoney.ru/quickpay/form */}
 
           <form className="form-purchase">
-            {/* <input type="hidden" name="name" value="Имя на карте" /> */}
             <div className="color_dark mb-3 pur_name pur_input"></div>
-            {/* <input type="hidden"  name="card-num" value="41001xxxxxxxxxxxx" /> */}
             <div className="color_dark mb-3 pur_card-num pur_input"></div>
             <div className="flex_row justify-between">
-              {/* <input type="hidden"  name="exp-month" value="" /> */}
               <div className="flex_row mt-5">
                 <div className="color_dark pur_month pur_input"></div>
-                {/* <input type="hidden"  name="exp-year" value="" /> */}
                 <div className="color_dark pur_year pur_input"></div>
-                {/* <input type="hidden"  name="cvc" value="CVC" /> */}
               </div >
               <div className="color_dark mt-5 pur_cvc pur_input"></div>
             </div>
           </form>
+        </div >
 
+        <div className='purchase__btn-box'>
+          <GooglePayButton
+            environment="TEST"
+            paymentRequest={{
+              apiVersion: 2,
+              apiVersionMinor: 0,
+              allowedPaymentMethods: [
+                {
+                  type: 'CARD',
+                  parameters: {
+                    allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                    allowedCardNetworks: ['MASTERCARD', 'VISA'],
+                  },
+                  tokenizationSpecification: {
+                    type: 'PAYMENT_GATEWAY',
+                    parameters: {
+                      gateway: 'example',
+                      gatewayMerchantId: 'exampleGatewayMerchantId',
+                    },
+                  },
+                },
+              ],
+              merchantInfo: {
+                merchantId: '12345678901234567890',
+                merchantName: 'Demo Merchant',
+              },
+              transactionInfo: {
+                totalPriceStatus: 'FINAL',
+                totalPriceLabel: 'Total',
+                totalPrice: '1',
+                currencyCode: 'RUB',
+                countryCode: 'RU',
+              },
+              shippingAddressRequired: true,
+              callbackIntents: ['SHIPPING_ADDRESS', 'PAYMENT_AUTHORIZATION'],
+            }}
+            onLoadPaymentData={paymentRequest => {
+              console.log('Success', paymentRequest);
+            }}
+            onPaymentAuthorized={paymentData => {
+              console.log('Payment Authorised Success', paymentData)
+              return { transactionState: 'SUCCESS' }
+            }
+            }
+            onPaymentDataChanged={paymentData => {
+              console.log('On Payment Data Changed', paymentData)
+              return {}
+            }
+            }
+            existingPaymentMethodRequired='false'
+            buttonColor='white'
+            buttonType='Buy'
+          />
         </div>
 
         <div className='purchase__btn-box'>

@@ -21,7 +21,6 @@ export default function Reader() {
   const [numPages, setNumPages] = useState(null);
 
   const [pageNumber, setPageNumber] = useState(1);
-  // const [file, setFile] = useState(null)
 
   useEffect(() => {
     
@@ -32,9 +31,7 @@ export default function Reader() {
       .then(book1 => {
         if (book1.exists)
           setBook([book1.data(), book1.id])
-          dispatch(fetchGetFile(book1.data().backFileName))
-          console.log(book);
-          
+          dispatch(fetchGetFile(book1.data().backFileName))          
           setNumPages(Number(book1.data().demo[1]))
           setPageNumber(Number(book1.data().demo[0]))
           setShowFrom(Number(book1.data().demo[0]))
@@ -42,16 +39,6 @@ export default function Reader() {
       })
 
   }, [])
-    
-  //   // fetch('http://localhost:4000/read', {
-  //   //   method: 'POST',
-  //   //   responseType: 'blob',
-  //   //   headers: { 'Content-Type': 'Application/json' },
-  //   //   // headers: { 'Content-Type' : 'multipart/form-data' },
-  //   //   body: JSON.stringify({id: id})
-  //   // })
-  //   // .then(async res => res.blob([res.data], {type: 'application/pdf'}))
-  //   // .then(data => setFile(data))
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -78,8 +65,6 @@ export default function Reader() {
   }
 
 
-
-
   function prevOne() {
     setPageNumber((prev) => {
       if (prev > showFrom) {
@@ -101,9 +86,6 @@ export default function Reader() {
   }
 
 
-
-
-
   function lastPage(pageNumber) {
     if (pageNumber < showTo) {
       return pageNumber + 1
@@ -121,7 +103,7 @@ export default function Reader() {
 
   return (
     <div className='background flex_center flex_column'>
-      {/* <Link to={`/user/pub/${book && book[1]}`} className="reader_button"><button className='button' >Назад</button></Link> */}
+      
       <div className="reader_button_box">
         <button onClick={disabledChange} className='button btn-one-page mr-4' >Показывать одну страницу</button>
         <button onClick={disabledChange} className='button btn-two-pages mr-4 disabled' >Показывать две страницы</button>

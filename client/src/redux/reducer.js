@@ -1,4 +1,4 @@
-import { ADD_FILE, GET_FILE} from './actionTypes/actionTypes'
+import { ADD_FILE, GET_FILE } from './actionTypes/actionTypes'
 
 const initialState = { title: 'books', backFileName: '', file: [] }
 

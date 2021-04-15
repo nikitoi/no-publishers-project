@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from 'firebase'
 import { Link } from 'react-router-dom'
 import Slider from "react-slick";
-// import zaglushka from './zaglushka'
 import './BooksList.scss'
-
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 
 
 function BooksList(props) {
@@ -48,7 +44,6 @@ function BooksList(props) {
       </Slider>
       <h3 className='h3Booklist'>Любимые книги наших читателей</h3>
       <Slider {...settings}>
-        {console.log(books)}
         {[...books]?.sort((a, b) => a[0].price - b[0].price)?.map(el => {
           return (
             <div className="flex_center" key={Math.random()}>

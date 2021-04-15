@@ -11,15 +11,6 @@ function InfoBook(props) {
   const [book, setBook] = useState(null)
   const history = useHistory()
 
-  function buyBook() {
-    firebase.firestore()
-      .collection('users')
-      .doc(currentUser.uid)
-      .update({ purBooks: firebase.firestore.FieldValue.arrayUnion(params.id) })
-      
-      history.push('/user')
-  }
-
   useEffect(() => {
     firebase.firestore()
       .collection('books')

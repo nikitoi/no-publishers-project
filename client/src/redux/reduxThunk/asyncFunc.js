@@ -5,7 +5,7 @@ export const fetchAddFile = (file) => {
   return (dispatch) => {
     
     // fetch(process.env.REACT_APP_UPLOADFILE_URL,{
-    fetch('http://localhost:4000/testupl',{
+    fetch(process.env.REACT_APP_SERVER_URL+'/upl',{
       method: 'POST',
       body: file
   })
@@ -17,8 +17,8 @@ export const fetchAddFile = (file) => {
 // инициализирует студентов
 export const fetchGetFile = (id) => {
   return (dispatch) => {
-    // fetch(process.env.REACT_APP_GETFILE_URL, {
-      fetch('http://localhost:4000/read', { 
+    fetch(process.env.REACT_APP_SERVER_URL+'/read', {
+      // fetch('http://localhost:4000/read', { 
       
       method: 'POST',
       responseType: 'blob',

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {fetchAddFile} from '../../redux/reduxThunk/asyncFunc'
+import { fetchAddFile } from '../../redux/reduxThunk/asyncFunc'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useAuth } from "../../context/AuthContext";
@@ -39,7 +39,7 @@ function AddBook(props) {
       .then(res => res.json())
       .then(data => pdfBack = data)
 
-    
+
     // dispatch(fetchAddFile(formData))
 
       const currStore = store.getState()

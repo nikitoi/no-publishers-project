@@ -21,9 +21,9 @@ function Login() {
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
       history.push('/')
-  
+
     } catch (error) {
-      setError(error.message)
+      setError(`Учетная запись не найдена, проверьте правильность ввода почты и пароля или зарегестрируйтесь!`)
       setLoading(false)
     }
   }
@@ -46,16 +46,16 @@ function Login() {
       history.push('/')
 
     } catch (error) {
-      setError(error.message)
+      setError('Учетная запись не найдена, проверьте правильность ввода почты и пароля или зарегестрируйтесь!')
       setLoading(false)
     }
   }
 
   return (
-    <div className='background flex_center'>
+    <div className='background flex_column flex_center'>
+      {error && <p>{error}</p>}
       <div className="wrapper-white">
-        {error && <p>{error}</p>}
-        <button onClick={googleSignup} className='button button-icon'>Sign in via Google account</button>
+        <button onClick={googleSignup} className='button button-icon'>Войти через google аккаунт</button>
         <form onSubmit={handleSubmit} className='modal_form'>
           <div className="color_dark mb-1 font-12">Введите логин и пароль</div>
           <input required ref={emailRef} className='auth input mb-1 color-light' type='email' name='email' placeholder='Email' />
@@ -64,6 +64,7 @@ function Login() {
           <div className="color_dark">У вас ещё нет аккаунта? <Link className='link link_dark' to="/signup">Зарегистрироваться</Link></div>
         </form>
       </div>
+      
     </div>
 
   );

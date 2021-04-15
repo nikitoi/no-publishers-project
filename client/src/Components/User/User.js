@@ -40,9 +40,7 @@ function User() {
           req.data()?.purBooks.map(el => {
             
             return (
-              firebase.firestore().collection('books').doc(el).get().then(req => {
-                console.log('qqqqq',req.data());
-                
+              firebase.firestore().collection('books').doc(el).get().then(req => {                
                 setpurBooks((prev) => [...prev, [req.data(), req.id]])
               })
             )

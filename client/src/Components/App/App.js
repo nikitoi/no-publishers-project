@@ -15,6 +15,7 @@ import PublishedBook from "../PublishedBook/PublishedBook"
 import BoughtBook from "../BoughtBook/BoughtBook"
 import Reader from '../Reader/Reader'
 import PurReader from '../PurReader/PurReader'
+import Purchase from '../Purchase/Purchase'
 import TestUpload from '../TestUpload/TestUpload'
 import BooksList from '../BooksList/BooksList'
 import Edit from '../Edit/Edit'
@@ -50,8 +51,14 @@ function App() {
             <Route path="/projectTeam">
               <ProjectTeam />
             </Route>
-            <Route path="/books/:id">
+            <Route exact path="/books/:id">
               <InfoBook />
+            </Route>
+            <Route path="/books/:id/buy">
+              <Purchase />
+            </Route>
+            <Route path="/books/:id/read">
+              <Reader />
             </Route>
             <Route exact path="/user/pub/:id">
               <PublishedBook />

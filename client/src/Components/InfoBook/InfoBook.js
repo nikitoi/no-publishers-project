@@ -47,8 +47,8 @@ function InfoBook(props) {
         </div>
       </div>
       <div className='buttonList'>
-        <button onClick={buyBook} className='button buttonBook butlist mr-3' >Купить за {book && book[0].price} &#8381;</button>
-        <Link to={`/user/pub/${book && book[1]}/read`}><button className='button buttonBook butlist' >Ознакомительная версия</button></Link>
+        <Link to={`/books/${book && book[1]}/buy`}><button className='button buttonBook butlist mr-3' >Купить за {book && book[0].price} &#8381;</button></Link>
+        <Link to={`/books/${book && book[1]}/read`}><button className='button buttonBook butlist' >Ознакомительная версия</button></Link>
       </div>
     </div>
   );

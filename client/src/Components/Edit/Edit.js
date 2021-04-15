@@ -13,6 +13,7 @@ function Edit(props) {
   const title = useRef();
   const bookauthor = useRef();
   const description = useRef();
+  const price = useRef();
 
   function updateBook(e) {
     e.preventDefault();
@@ -23,7 +24,8 @@ function Edit(props) {
       .set({
         title: title.current.value,
         bookauthor: bookauthor.current.value,
-        description: description.current.value
+        description: description.current.value,
+        price: price.current.value
       }, { merge: true })
       history.push('/user')
   }
@@ -52,7 +54,7 @@ function Edit(props) {
           <label htmlFor="title" className="color_darker">Описание</label>
           <textarea ref={description} className='auth input mb-1 input-textarea wide-input color-light textarea-edit' name='description' required defaultValue={book?.description} type='text' placeholder='Описание' ></textarea>
           <label htmlFor="title" className="color_darker">Цена в &#8381;</label>
-          <input className='auth input mb-1 wide-input color-light' name='price' type='number' placeholder='Укажите ценник в рублях' required defaultValue={book?.price} />
+          <input ref={price} className='auth input mb-1 wide-input color-light' name='price' type='number' placeholder='Укажите ценник в рублях' required defaultValue={book?.price} />
           {/* <Link to='/user'> */}
           <button type="submit" className='button buttonBook butlist' >Сохранить изменения</button>
           {/* </Link> */}

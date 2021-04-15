@@ -10,7 +10,6 @@ export const fetchAddFile = (file) => {
       body: file
   })
   .then(res => res.json())
-  // .then(data => console.log(data))
   .then(data => dispatch(addFileAC(data)))
 }}
 
@@ -27,7 +26,6 @@ export const fetchGetFile = (id) => {
     })
     .then(async res => res.blob([res.data], {type: 'application/pdf'}))
     // .then(data => setFile(data))
-  // .then(data => console.log(data))
     .then(data => dispatch(getFileAC(data)))
   }
 }

@@ -33,7 +33,6 @@ export default function PurReader() {
         if (book1.exists)
           setBook([book1.data(), book1.id])
           dispatch(fetchGetFile(book1.data().backFileName))
-          console.log(book);
           
           setNumPages(Number(book1.data().demo[1]))
           setPageNumber(Number(book1.data().demo[0]))

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import firebase from 'firebase'
 import { useAuth } from '../../context/AuthContext';
+import GooglePayButton from '@google-pay/button-react';
 import './Purchase.scss'
 
 function Purchase(props) {
@@ -53,7 +54,7 @@ function Purchase(props) {
         </div>
 
         <div className='form-purchase-box'>
-            {/* Сайт https://yoomoney.ru/quickpay/form */}
+          {/* Сайт https://yoomoney.ru/quickpay/form */}
 
           <form className="form-purchase">
             {/* <input type="hidden" name="name" value="Имя на карте" /> */}
@@ -71,7 +72,61 @@ function Purchase(props) {
               <div className="color_dark mt-5 pur_cvc pur_input"></div>
             </div>
           </form>
+        </div >
 
+        <div className='purchase__btn-box'>
+          <GooglePayButton
+            environment="TEST"
+            paymentRequest={{
+              apiVersion: 2,
+              apiVersionMinor: 0,
+              allowedPaymentMethods: [
+                {
+                  type: 'CARD',
+                  parameters: {
+                    allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                    allowedCardNetworks: ['MASTERCARD', 'VISA'],
+                  },
+                  tokenizationSpecification: {
+                    type: 'PAYMENT_GATEWAY',
+                    parameters: {
+                      gateway: 'example',
+                      gatewayMerchantId: 'exampleGatewayMerchantId',
+                    },
+                  },
+                },
+              ],
+              merchantInfo: {
+                merchantId: '12345678901234567890',
+                merchantName: 'Demo Merchant',
+              },
+              transactionInfo: {
+                totalPriceStatus: 'FINAL',
+                totalPriceLabel: 'Total',
+                totalPrice: '1',
+                currencyCode: 'RUB',
+                countryCode: 'RU',
+              },
+              shippingAddressRequired: true,
+              callbackIntents: ['SHIPPING_ADDRESS', 'PAYMENT_AUTHORIZATION'],
+            }}
+            onLoadPaymentData={paymentRequest => {
+              console.log('Success', paymentRequest);
+            }}
+            onPaymentAuthorized={paymentData => {
+              console.log('Payment Authorised Success', paymentData)
+              return { transactionState: 'SUCCESS' }
+            }
+            }
+            onPaymentDataChanged={paymentData => {
+              console.log('On Payment Data Changed', paymentData)
+              return {}
+            }
+            }
+            existingPaymentMethodRequired='false'
+            buttonColor='white'
+            buttonType='Buy'
+          />
         </div>
 
         <div className='purchase__btn-box'>

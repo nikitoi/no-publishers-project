@@ -32,9 +32,7 @@ export default function Reader() {
       .then(book1 => {
         if (book1.exists)
           setBook([book1.data(), book1.id])
-          dispatch(fetchGetFile(book1.data().backFileName))
-          console.log(book);
-          
+          dispatch(fetchGetFile(book1.data().backFileName))          
           setNumPages(Number(book1.data().demo[1]))
           setPageNumber(Number(book1.data().demo[0]))
           setShowFrom(Number(book1.data().demo[0]))

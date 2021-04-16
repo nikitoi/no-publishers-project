@@ -37,6 +37,8 @@ function AddBook(props) {
     })
       .then(res => res.json())
       .then(data => pdfBack = data)
+      .then(() => {
+
 
     const currStore = store.getState()
     const pdfName = currStore.backFileName
@@ -96,6 +98,10 @@ function AddBook(props) {
           });
       }
     );
+
+
+  })
+
   }
 
   let [pdfName, setPdfName] = useState('')

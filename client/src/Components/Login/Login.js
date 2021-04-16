@@ -61,7 +61,7 @@ function Login() {
     <div className='background flex_column flex_center'>
       {error && <p>{error}</p>}
       <div className="wrapper-white">
-        <button onClick={googleSignup} className='button button-icon'>Войти через google аккаунт</button>
+        <button onClick={googleSignup} className='button button-icon'>Войти через Google аккаунт</button>
         <form onSubmit={handleSubmit} className='modal_form'>
           <div className="color_dark mb-1 font-12">Введите логин и пароль</div>
           <input required ref={emailRef} className='auth input mb-1 color-light' type='email' name='email' placeholder='Email' />

@@ -129,7 +129,7 @@ export default function PurReader() {
           </Document>
           <button className="reader-next reader-btn" onClick={next}>&#8250;</button>
         </div>
-        <p className="flex_center reader__pages-count">Page{pageNumber <  numPages ? `s ${pageNumber}-${pageNumber + 1}` : ` ${pageNumber}`} of {numPages}</p>
+        <p className="flex_center reader__pages-count">Страниц{pageNumber <  numPages ? `ы ${pageNumber}-${pageNumber + 1}` : `а ${pageNumber}`} из {numPages}</p>
       </div>
 
       <div className="one-page box-invisible">
@@ -144,7 +144,7 @@ export default function PurReader() {
 
           <button className="reader-next reader-btn" onClick={nextOne}>&#8250;</button>
         </div>
-        <p className="flex_center reader__pages-count">Page {pageNumber} of {numPages}</p>
+        <p className="flex_center reader__pages-count">Страница {pageNumber} из {numPages}</p>
       </div>
       
     </div>

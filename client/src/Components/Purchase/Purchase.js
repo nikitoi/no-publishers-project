@@ -10,7 +10,7 @@ function Purchase(props) {
   const params = useParams()
   const { currentUser } = useAuth()
   const [book, setBook] = useState(null)
-  const [bookPrice, setPrice] = useState('')
+  const [bookPrice, setBookPrice] = useState(null)
   const history = useHistory()
 
   function buyBook() {
@@ -28,12 +28,13 @@ function Purchase(props) {
       .doc(params.id)
       .get()
       .then(book1 => {
-        if (book1.exists) {
-          setPrice(book1.data().price);
+        if (book1.exists){
+          setBookPrice(book1.data().price)
           setBook([book1.data(), book1.id])
         }
       })
-  }, [setBook, setPrice])
+
+  }, [setBook, setBookPrice])
 
   return (
     <div className='background flex_center flex_column pt-5 purchase'>

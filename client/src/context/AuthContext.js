@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { auth, firestore } from '../service/firebase'
+import PropTypes from 'prop-types';
 // import firebase from 'firebase'
 
 const AuthContext = React.createContext()
@@ -66,4 +67,8 @@ export function AuthProvider({ children }) {
       {!loading && children}
     </AuthContext.Provider>
   );
+}
+
+AuthProvider.propTypes = {
+  children: PropTypes.node,
 }

@@ -41,7 +41,7 @@ function Purchase(props) {
       <div className="purchase-box">
 
         <div className='purchase__book-info color_dark'>
-          <h4 className='purchase__title-book mb-4'>Вы собираетесь купить книгу "{book && book[0].title}"</h4>
+          <h4 className='purchase__title-book mb-4'>Вы собираетесь купить книгу &quot;{book && book[0].title}&quot;</h4>
           <h6 className='purchase__author-book' >Автора {book && book[0].bookauthor}</h6>
           <div>Сумма к оплате {book && book[0].price} &#8381;</div>
         </div>

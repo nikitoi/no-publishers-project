@@ -31,7 +31,7 @@ function MainDown() {
       <div className="maindown__arrow">
         <a href="#mainup"><img src="../images/down-arrow.png" className="arrow-up" alt="arrow-up" /></a>
       </div>
-      <a name="maindown">
+      <a name="maindown"></a>
         <Carousel >
           {carousels?.map((el) => {
             return (
@@ -55,7 +55,6 @@ function MainDown() {
             )
           })}
         </Carousel>
-      </a>
     </div>
   );
 }
